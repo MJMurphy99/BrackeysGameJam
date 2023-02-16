@@ -54,17 +54,17 @@ public class conveyorBelt : MonoBehaviour
         if(collision.gameObject.tag != "Player")
         {
             onBelt.Remove(collision.gameObject);
-            collision.gameObject.tag = "OffBelt";
+            //collision.gameObject.tag = "OffBelt";
         }
     }
 
     public void DespawnItems()
     {
-        despawnableItems = GameObject.FindGameObjectsWithTag("DespawnItem");
-        for (int i = 0; i < despawnableItems.Length; i++)
-        {
-            Destroy(despawnableItems[i]);
-        }
+        //despawnableItems = GameObject.FindGameObjectsWithTag("DespawnItem");
+        //for (int i = 0; i < despawnableItems.Length; i++)
+        //{
+        //    Destroy(despawnableItems[i]);
+        //}
     }
 
     //private void OnTriggerEnter(Collider other)

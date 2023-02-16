@@ -86,6 +86,7 @@ public class playerController : MonoBehaviour
         if (!sr.flipX && moveInput.x < 0)
         {
             sr.flipX = true;
+
         }
         else if(sr.flipX && moveInput.x > 0)
         {
