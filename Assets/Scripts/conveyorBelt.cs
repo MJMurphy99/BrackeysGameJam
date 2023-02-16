@@ -42,14 +42,20 @@ public class conveyorBelt : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        onBelt.Add(collision.gameObject);
-        collision.gameObject.tag = "OnBelt";
+        if(collision.gameObject.tag != "Player")
+        {
+            onBelt.Add(collision.gameObject);
+            collision.gameObject.tag = "OnBelt";
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        onBelt.Remove(collision.gameObject);
-        collision.gameObject.tag = "OffBelt";
+        if(collision.gameObject.tag != "Player")
+        {
+            onBelt.Remove(collision.gameObject);
+            collision.gameObject.tag = "OffBelt";
+        }
     }
 
     public void DespawnItems()
@@ -64,10 +70,12 @@ public class conveyorBelt : MonoBehaviour
     //private void OnTriggerEnter(Collider other)
     //{
     //    onBelt.Add(other.gameObject);
+    //    other.gameObject.tag = "OnBelt";
     //}
 
     //private void OnTriggerExit(Collider other)
     //{
     //    onBelt.Remove(other.gameObject);
+    //    other.gameObject.tag = "OffBelt";
     //}
 }

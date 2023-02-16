@@ -159,7 +159,7 @@ MonoBehaviour:
   canSpawn: 1
   spawner: {fileID: 149661590}
   randItemIndex: 0
-  spawnerRate: 5
+  spawnerRate: 4
 --- !u!4 &149661590
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149661588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.1, y: 2.86, z: -6.09}
+  m_LocalPosition: {x: 16.96, y: 2.86, z: -6.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -242,7 +242,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &270803954
@@ -640,6 +640,10 @@ PrefabInstance:
       value: Brackeys 2023.1 - Enviornment
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 26bd5f37893c7411fba4c82db3391285, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 26bd5f37893c7411fba4c82db3391285, type: 3}
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
@@ -712,7 +716,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &1156118244
@@ -743,6 +747,50 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &1338248815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1338248817}
+  - component: {fileID: 1338248816}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1338248816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338248815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d3ff052af23b497bb8e734948e11d34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1338248817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1338248815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492267063
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +806,7 @@ GameObject:
   - component: {fileID: 1492267069}
   m_Layer: 0
   m_Name: BrackeysJam - Main Character
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -777,9 +825,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1492267069}
   sr: {fileID: 1492267066}
+  cc: {fileID: 1492267068}
   speed: 8
+  beltSpeedLeft: 9
+  beltSpeedRight: 2
   jumpForce: 20
-  isGrounded: 1
+  raycastObject: {fileID: 1982845453}
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  beltMask:
+    serializedVersion: 2
+    m_Bits: 128
+  direction: {x: -3, y: 0, z: 0}
 --- !u!212 &1492267066
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -843,7 +901,8 @@ Transform:
   m_LocalPosition: {x: 9.97, y: 1.468, z: -2.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1982845453}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -857,7 +916,7 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: 09994b300311c4ff5b9b0677e9012e3b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.61
   m_Height: 0.9411765
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -890,7 +949,7 @@ GameObject:
   - component: {fileID: 1897327390}
   - component: {fileID: 1897327389}
   - component: {fileID: 1897327388}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Coveyor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -909,7 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbb7c75f82c1f461a910bac269e549d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2000
+  speed: 100
   direction: {x: -1, y: 0, z: 0}
   onBelt: []
   despawnableItems: []
@@ -934,7 +993,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897327387}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -991,4 +1050,35 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1982845452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1982845453}
+  m_Layer: 0
+  m_Name: Raycast
+  m_TagString: Untagged
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1982845453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982845452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.65, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1492267067}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

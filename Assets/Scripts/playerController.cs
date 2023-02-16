@@ -6,62 +6,80 @@ public class playerController : MonoBehaviour
 {
     public Rigidbody rb;
     public SpriteRenderer sr;
+    public CapsuleCollider cc;
     //public Animator anim;
 
     public float speed;
+    public float beltSpeedLeft;
+    public float beltSpeedRight;
 
     private Vector2 moveInput;
 
     //Jump
     public float jumpForce;
-    public bool isGrounded = true;
+    public Transform raycastObject;
+    public LayerMask groundMask;
+    public LayerMask beltMask;
+    //public bool isGrounded = true;
 
+    public Vector3 direction;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        cc = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Movement
-        moveInput.x = Input.GetAxis("Horizontal");
-        moveInput.y = Input.GetAxis("Vertical");
-        //moveInput.Normalize();
+        if (!isOnBelt())
+        {
+            moveInput.x = Input.GetAxis("Horizontal");
+            moveInput.y = Input.GetAxis("Vertical");
+            //moveInput.Normalize();
 
-        rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
+            rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
+        }
+        else if(isOnBelt())
+        {
+            moveInput.x = Input.GetAxis("Horizontal");
+            moveInput.y = Input.GetAxis("Vertical");
 
+            rb.velocity = speed * direction * Time.deltaTime;
+
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                rb.velocity = new Vector3(moveInput.x * beltSpeedLeft, rb.velocity.y, moveInput.y * speed);
+                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+                {
+                    rb.velocity = new Vector3(moveInput.x * beltSpeedLeft, rb.velocity.y, moveInput.y * beltSpeedLeft);
+                }
+            }
+            if (Input.GetKey(KeyCode.RightArrow))
+            {
+                rb.velocity = new Vector3(moveInput.x * beltSpeedRight, rb.velocity.y, moveInput.y * speed);
+                if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+                {
+                    rb.velocity = new Vector3(moveInput.x * beltSpeedRight, rb.velocity.y, moveInput.y * beltSpeedRight);
+                }
+
+            }
+
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+            {
+                rb.velocity = new Vector3(moveInput.x, rb.velocity.y, moveInput.y * speed);
+            }
+        }
 
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    rb.velocity = new Vector3(rb.velocity.x - speed, rb.velocity.y, rb.velocity.z);
-        //}
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    rb.velocity = new Vector3(rb.velocity.x + speed, rb.velocity.y, rb.velocity.z);
-        //}
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z * speed);
-        //}
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, rb.velocity.z * -speed);
-        //}
-        //if(!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    rb.velocity = new Vector3(0, rb.velocity.y, 0);
-        //}
-
-
+        //Debug(raycastObject.position, Vector3.up * .1f, Color.red);
 
 
         //Flip Sprite
@@ -119,19 +137,14 @@ public class playerController : MonoBehaviour
         //}
     }
 
-    private void OnCollisionEnter(Collision collision)
+    bool isGrounded()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        return Physics.CheckSphere(raycastObject.position, 0.1f, groundMask);
+        return Physics.CheckSphere(raycastObject.position, 0.1f, beltMask);
     }
 
-    private void OnCollisionExit(Collision collision)
+    bool isOnBelt()
     {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = false;
-        }
+        return Physics.CheckSphere(raycastObject.position, 0.1f, beltMask);
     }
 }
