@@ -7,7 +7,7 @@ public class playerController : MonoBehaviour
     public Rigidbody rb;
     public SpriteRenderer sr;
     public CapsuleCollider cc;
-    //public Animator anim;
+    private Animator anim;
 
     public float speed;
     public float beltSpeedLeft;
@@ -30,6 +30,7 @@ public class playerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -37,6 +38,8 @@ public class playerController : MonoBehaviour
     {
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
+            anim.Play("Main Character_Run");
+
             facing.x = Input.GetAxisRaw("Horizontal");
             if (Input.GetAxisRaw("Vertical") != 0)
                 facing.z = Input.GetAxisRaw("Vertical");
@@ -44,8 +47,14 @@ public class playerController : MonoBehaviour
         }
         else if(Input.GetAxisRaw("Vertical") != 0)
         {
+            anim.Play("Main Character_Run");
+
             facing.x = 0;
             facing.z = Input.GetAxisRaw("Vertical");
+        }
+        else
+        {
+            anim.Play("Main Character_Idle");
         }
 
         //Movement
