@@ -24,6 +24,7 @@ public class playerController : MonoBehaviour
 
     public Vector3 direction;
     public static Vector3 facing;
+    public static Interactable interaction = null;
 
     // Start is called before the first frame update
     void Start()

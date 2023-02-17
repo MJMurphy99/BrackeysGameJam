@@ -11,14 +11,19 @@ public class pickUpItem : MonoBehaviour
     private GameObject itemHolding;
 
     public Transform holdPivot;
-    public GameObject item;
+    public static GameObject item;
 
-    public bool isHoldingitem = false;
+    public static bool isHoldingitem = false;
 
     private float chargeCounter = 0.0f;
     public float chargeMax;
     public int strength;
+    private playerController pc;
 
+    private void Start()
+    {
+        pc = GetComponent<playerController>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -31,17 +36,22 @@ public class pickUpItem : MonoBehaviour
             }
             else if(Input.GetKeyUp(KeyCode.Q))
             {
-                if (chargeCounter >= 0.25f)
-                    itemHolding.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+                if(playerController.interaction != null)
+                {
+                    if(!playerController.interaction.GetEmptyHandsCheck())
+                        playerController.interaction.StartInteractiveProcess();
+                }
                 else
-                    itemHolding.transform.position = transform.position * 1f;
-                    
+                {
+                    if (chargeCounter >= 0.25f)
+                        itemHolding.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+                    else
+                        itemHolding.transform.position = transform.position * 1f;
 
-                itemHolding.transform.parent = null;
-                item.GetComponent<Rigidbody>().isKinematic = false;
 
-                isHoldingitem = false;
-                chargeCounter = 0.0f;
+                    RemoveItemFromHands();
+                    chargeCounter = 0.0f;
+                }
             }
         }
     }
@@ -53,17 +63,25 @@ public class pickUpItem : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 item = other.transform.parent.gameObject;
-                itemHolding = item;
-                itemHolding.transform.position = 
+                //itemHolding = item;
+                item.transform.position = 
                     new Vector3(holdPivot.position.x, holdPivot.position.y, holdPivot.position.z);
-                itemHolding.transform.parent = holdPivot.transform;
+                //itemHolding.transform.parent = holdPivot.transform;
                 //item.GetComponent<BoxCollider>().enabled = false;
                 item.GetComponent<Rigidbody>().isKinematic = true;
 
                 isHoldingitem = true;
 
-                itemHolding.tag = "CurrentHeldItem";
+                //itemHolding.tag = "CurrentHeldItem";
             }
         }
+    }
+
+    public static void RemoveItemFromHands()
+    {
+        //itemHolding.transform.parent = null;
+        item.GetComponent<Rigidbody>().isKinematic = false;
+
+        isHoldingitem = false;
     }
 }
