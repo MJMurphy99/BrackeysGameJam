@@ -8,16 +8,11 @@ public class conveyorBelt : MonoBehaviour
 
     public Vector3 direction;
 
-    public List<GameObject> onBelt;
+    public static List<GameObject> onBelt = new List<GameObject>();
 
     public GameObject[] despawnableItems;
     public GameObject[] timerDespawnableItems;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -26,18 +21,6 @@ public class conveyorBelt : MonoBehaviour
         {
             onBelt[i].GetComponent<Rigidbody>().velocity = speed * direction * Time.deltaTime;
         }
-
-        foreach (var item in onBelt)
-        {
-            if(gameObject.tag == "DespawnItem")
-            {
-                onBelt.Remove(gameObject);
-            }
-
-            DespawnItems();
-        }
-
-        timerDespawnableItems = GameObject.FindGameObjectsWithTag("OffBelt");
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,7 +28,6 @@ public class conveyorBelt : MonoBehaviour
         if(collision.gameObject.tag != "Player")
         {
             onBelt.Add(collision.gameObject);
-            collision.gameObject.tag = "OnBelt";
         }
     }
 
@@ -54,28 +36,6 @@ public class conveyorBelt : MonoBehaviour
         if(collision.gameObject.tag != "Player")
         {
             onBelt.Remove(collision.gameObject);
-            //collision.gameObject.tag = "OffBelt";
         }
     }
-
-    public void DespawnItems()
-    {
-        //despawnableItems = GameObject.FindGameObjectsWithTag("DespawnItem");
-        //for (int i = 0; i < despawnableItems.Length; i++)
-        //{
-        //    Destroy(despawnableItems[i]);
-        //}
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    onBelt.Add(other.gameObject);
-    //    other.gameObject.tag = "OnBelt";
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    onBelt.Remove(other.gameObject);
-    //    other.gameObject.tag = "OffBelt";
-    //}
 }

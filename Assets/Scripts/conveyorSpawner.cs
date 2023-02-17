@@ -12,12 +12,6 @@ public class conveyorSpawner : MonoBehaviour
     public int randItemIndex;
     public float spawnerRate;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

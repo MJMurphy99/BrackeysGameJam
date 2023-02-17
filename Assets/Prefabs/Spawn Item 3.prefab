@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 1929738844}
   - component: {fileID: 1929738843}
   - component: {fileID: 1929738842}
-  - component: {fileID: 1929738841}
   m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
@@ -98,23 +97,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1929738841
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929738839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9dbe550e91154e93b7dd11d4b065f27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickUpMask:
-    serializedVersion: 2
-    m_Bits: 256
-  item: {fileID: 7535962851287360221}
-  isHoldingitem: 0
 --- !u!1 &7535962851287360221
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,11 +110,9 @@ GameObject:
   - component: {fileID: 7535962851287360222}
   - component: {fileID: 7535962851287360223}
   - component: {fileID: 7535962851287360220}
-  - component: {fileID: -2732378184423674609}
-  - component: {fileID: 3932215884821752722}
   m_Layer: 8
   m_Name: Spawn Item 3
-  m_TagString: SpawnedObject
+  m_TagString: Destructable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,33 +212,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &-2732378184423674609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7535962851287360221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f8a5d43c83704382a2717bb09b65571, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3932215884821752722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7535962851287360221}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33cf2bd2502474e779e8bdaa8f703b58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Ground:
-    serializedVersion: 2
-    m_Bits: 64
-  Conveyor:
-    serializedVersion: 2
-    m_Bits: 128

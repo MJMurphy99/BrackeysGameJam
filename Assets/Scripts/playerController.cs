@@ -23,6 +23,7 @@ public class playerController : MonoBehaviour
     //public bool isGrounded = true;
 
     public Vector3 direction;
+    public static Vector3 facing;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,19 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetAxisRaw("Horizontal") != 0)
+        {
+            facing.x = Input.GetAxisRaw("Horizontal");
+            if (Input.GetAxisRaw("Vertical") != 0)
+                facing.z = Input.GetAxisRaw("Vertical");
+            else facing.z = 0;
+        }
+        else if(Input.GetAxisRaw("Vertical") != 0)
+        {
+            facing.x = 0;
+            facing.z = Input.GetAxisRaw("Vertical");
+        }
+
         //Movement
         if (!isOnBelt())
         {

@@ -10,6 +10,7 @@ TagManager:
   - OffBelt
   - DespawnItem
   - CurrentHeldItem
+  - Destructable
   layers:
   - Default
   - TransparentFX

@@ -10,78 +10,53 @@ public class pickUpItem : MonoBehaviour
     public Vector3 direction { get; set; }
     private GameObject itemHolding;
 
-    private GameObject player;
+    public Transform holdPivot;
     public GameObject item;
 
     public bool isHoldingitem = false;
 
-    //private void Start()
-    //{
-    //    playerPickUpTransform = player.transform.GetChild(0);
-    //}
+    private float chargeCounter = 0.0f;
+    public float chargeMax;
+    public int strength;
+
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //if (itemHolding)
-            //{
-            //    itemHolding.transform.position = transform.position * 1f;
-            //    itemHolding.transform.parent = null;
-
-            //    //if (itemHolding.GetComponent<Rigidbody>())
-            //    //{
-            //    //    itemHolding.GetComponent<Rigidbody>().isKinematic = false;
-            //    //}
-            //    itemHolding = null;
-            //}
-            //else
-            //{
-            //    Collider[] pickUpItem = Physics.OverlapSphere(transform.position + direction, 0.1f, pickUpMask);
-
-            //    if (pickUpItem[0])
-            //    {
-            //        itemHolding = pickUpItem[0].gameObject;
-            //        itemHolding.transform.position = playerPickUpTransform.position;
-            //        itemHolding.transform.parent = player.transform;
-
-            //        //if (itemHolding.GetComponent<Rigidbody>())
-            //        //{
-            //        //    itemHolding.GetComponent<Rigidbody>().isKinematic = true;
-            //        //}
-            //    }
-            //}
-        }
         if (isHoldingitem == true)
         {
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (Input.GetKey(KeyCode.Q))
             {
-                //itemHolding.tag = "OffBelt";
+                chargeCounter += Time.deltaTime;
+            }
+            else if(Input.GetKeyUp(KeyCode.Q))
+            {
+                if (chargeCounter >= 0.25f)
+                    itemHolding.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+                else
+                    itemHolding.transform.position = transform.position * 1f;
+                    
 
-                itemHolding.transform.position = player.transform.position * 1f;
                 itemHolding.transform.parent = null;
-                //item.GetComponent<BoxCollider>().enabled = true;
                 item.GetComponent<Rigidbody>().isKinematic = false;
 
                 isHoldingitem = false;
+                chargeCounter = 0.0f;
             }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && isHoldingitem == false)
+        if (isHoldingitem == false)
         {
-            Debug.Log("Player Enter");
-
-            player = other.gameObject;
-
-            if(Input.GetKey(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
+                item = other.transform.parent.gameObject;
                 itemHolding = item;
-                itemHolding.transform.position = new Vector3(other.transform.position.x, other.transform.position.y + 1.1f, other.transform.position.z);
-                itemHolding.transform.parent = other.transform;
+                itemHolding.transform.position = 
+                    new Vector3(holdPivot.position.x, holdPivot.position.y, holdPivot.position.z);
+                itemHolding.transform.parent = holdPivot.transform;
                 //item.GetComponent<BoxCollider>().enabled = false;
                 item.GetComponent<Rigidbody>().isKinematic = true;
 
