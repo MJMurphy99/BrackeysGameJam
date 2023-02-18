@@ -32,6 +32,16 @@ public class playerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         cc = GetComponent<CapsuleCollider>();
         anim = GetComponent<Animator>();
+
+        if (GlobalControl.playerSpeedPowerCollected == true)
+        {
+            speed = speed * 1.5f;
+        }
+
+        if (GlobalControl.playerJumpPowerCollected == true)
+        {
+            jumpForce = jumpForce * 1.5f;
+        }
     }
 
     // Update is called once per frame
