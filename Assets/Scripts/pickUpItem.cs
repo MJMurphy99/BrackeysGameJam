@@ -55,7 +55,7 @@ public class pickUpItem : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay(Collider other)
+    /*private void OnTriggerStay(Collider other)
     {
         if (isHoldingitem == false)
         {
@@ -70,7 +70,7 @@ public class pickUpItem : MonoBehaviour
                 isHoldingitem = true;
             }
         }
-    }
+    }*/
 
     public static void RemoveItemFromHands()
     {

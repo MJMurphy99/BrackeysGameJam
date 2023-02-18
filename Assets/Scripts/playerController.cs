@@ -25,7 +25,13 @@ public class playerController : MonoBehaviour
     public Vector3 direction;
     public static Vector3 facing;
     public static Interactable interaction = null;
-    public GameObject dropShadow;
+    public Transform dropShadow;
+    public float groundDepth;
+    public bool isHoldingitem = false;
+    private float chargeCounter = 0.0f;
+    public float chargeMax;
+    public int strength;
+    public static GameObject item;
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +54,8 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdateDropShadow();
+        Interact();
         if (Input.GetAxisRaw("Horizontal") != 0)
         {
             anim.Play("Main Character_Run");
@@ -144,5 +151,50 @@ public class playerController : MonoBehaviour
     bool isGrounded()
     {
         return Physics.CheckSphere(raycastObject.position, 0.1f);
+    }
+
+    private void UpdateDropShadow()
+    {
+        RaycastHit hit;
+        Physics.Raycast(raycastObject.position, Vector3.down, out hit);
+
+        groundDepth = hit.point.y;
+        Vector3 shadowPos = dropShadow.position;
+        dropShadow.transform.position = new Vector3(shadowPos.x, groundDepth, shadowPos.z);
+    }
+
+    private void Interact()
+    {
+        if (item != null)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                chargeCounter += Time.deltaTime;
+            }
+            else if (Input.GetKeyUp(KeyCode.E))
+            {
+                if (interaction != null)
+                {
+                    if (!interaction.GetEmptyHandsCheck())
+                        interaction.StartInteractiveProcess();
+                }
+                else
+                {
+                    if (chargeCounter >= 0.25f)
+                        item.GetComponent<Rigidbody>().velocity = facing * strength;
+                    else
+                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+
+                    item.GetComponent<Toy>().PutDown();
+                    item = null;
+                    chargeCounter = 0.0f;
+                }
+            }
+        }
+        else
+        {
+            if (Input.GetKeyUp(KeyCode.E) && interaction != null)
+                interaction.StartInteractiveProcess();
+        }
     }
 }

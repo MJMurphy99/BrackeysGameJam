@@ -10,22 +10,27 @@ public class WorkStation : Interactable
     public Transform itemPivot;
     public int workStationType;
 
-    private GameObject item;
+    private Toy t;
 
     public override void StartInteractiveProcess()
     {
-        item = pickUpItem.item;//When new types of items (toys and packages) are added, this will need to be updated to check for that
-        pickUpItem.RemoveItemFromHands();
-        item.transform.parent = itemPivot;
-        item.GetComponent<Rigidbody>().isKinematic = true;
-        item.transform.position = itemPivot.transform.position;
-        StartCoroutine("UpgradeItem");
-    }
-
-    public void CancelInteractiveProcess()
-    {
-        StopCoroutine("UpgradeItem");
-        timeSpent = 0;
+        if(t != null)
+        {
+            FinishedItem();
+        }
+        else
+        {
+            t = playerController.item.GetComponent<Toy>();
+            if (t.itemID == workStationType)
+            {
+                t.SetPivot(transform);
+                t.StartInteractiveProcess();
+                ToggleInteractivity();
+                StartCoroutine("UpgradeItem");
+            }
+            else
+                t = null;
+        }
     }
 
     private IEnumerator UpgradeItem()
@@ -37,6 +42,13 @@ public class WorkStation : Interactable
         }
 
         timeSpent = 0;
-        //Either replace parts item with toy item or activate toy state in a generic item base
+        t.UpgradeItemStage();
+        ToggleInteractivity();
+    }
+
+    private void FinishedItem()
+    {
+        t.SetPivot(playerHands);
+        t.StartInteractiveProcess();
     }
 }
