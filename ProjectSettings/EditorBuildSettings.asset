@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Graveyard.unity
+    path: Assets/Scenes/Title Scene.unity
     guid: 25805648a1852440cb5fd8b1519d5bd8
+  - enabled: 1
+    path: Assets/Scenes/FactoryScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 0a74c4399853a4d8da50648c9d22677e
   m_configObjects: {}

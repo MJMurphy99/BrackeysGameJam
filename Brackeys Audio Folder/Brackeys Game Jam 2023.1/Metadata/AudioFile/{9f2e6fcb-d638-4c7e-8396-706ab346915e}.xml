@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{9f2e6fcb-d638-4c7e-8396-706ab346915e}">
+		<property name="assetPath">
+			<value>Graveyard Ambience.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>67</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bea464d6-cfad-4a1a-a3cc-a8d56d938fd6}</destination>
+		</relationship>
+	</object>
+</objects>
