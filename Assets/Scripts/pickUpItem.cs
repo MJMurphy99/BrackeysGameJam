@@ -8,7 +8,6 @@ public class pickUpItem : MonoBehaviour
     public LayerMask pickUpMask;
 
     public Vector3 direction { get; set; }
-    private GameObject itemHolding;
 
     public Transform holdPivot;
     public static GameObject item;
@@ -44,9 +43,9 @@ public class pickUpItem : MonoBehaviour
                 else
                 {
                     if (chargeCounter >= 0.25f)
-                        itemHolding.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+                        item.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
                     else
-                        itemHolding.transform.position = transform.position * 1f;
+                        item.transform.position = transform.position * 1f;
 
 
                     RemoveItemFromHands();
@@ -63,23 +62,19 @@ public class pickUpItem : MonoBehaviour
             if (Input.GetKey(KeyCode.E))
             {
                 item = other.transform.parent.gameObject;
-                //itemHolding = item;
                 item.transform.position = 
                     new Vector3(holdPivot.position.x, holdPivot.position.y, holdPivot.position.z);
-                //itemHolding.transform.parent = holdPivot.transform;
-                //item.GetComponent<BoxCollider>().enabled = false;
+                item.transform.parent = holdPivot.transform;
                 item.GetComponent<Rigidbody>().isKinematic = true;
 
                 isHoldingitem = true;
-
-                //itemHolding.tag = "CurrentHeldItem";
             }
         }
     }
 
     public static void RemoveItemFromHands()
     {
-        //itemHolding.transform.parent = null;
+        item.transform.parent = null;
         item.GetComponent<Rigidbody>().isKinematic = false;
 
         isHoldingitem = false;

@@ -6,30 +6,30 @@ public abstract class Interactable : MonoBehaviour
 {
     public bool needEmptyHands;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private SpriteRenderer sr;
+    private Color highlight = new Color(255, 235, 0, 255);
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public abstract void StartInteractiveProcess();//Might not be point to this, come back later
+    public abstract void StartInteractiveProcess();
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        sr = GetComponent<SpriteRenderer>();
+        if (other.CompareTag("Player"))
+        {
             playerController.interaction = this;
+            sr.color = highlight;
+        }   
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
+        {
             playerController.interaction = null;
+            sr.color = Color.white;
+        }   
     }
 
     public bool GetEmptyHandsCheck()

@@ -2,34 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AssembleToy : Interactable
+public class WorkStation : Interactable
 {
     private float timeSpent;
     public float totalTime;
     public float speed;
-    public Transform partsPivot;
+    public Transform itemPivot;
+    public int workStationType;
 
-    private GameObject parts;
+    private GameObject item;
 
     public override void StartInteractiveProcess()
     {
-        parts = pickUpItem.item;//When new types of items (toys and packages) are added, this will need to be updated to check for that
+        item = pickUpItem.item;//When new types of items (toys and packages) are added, this will need to be updated to check for that
         pickUpItem.RemoveItemFromHands();
-        parts.transform.parent = partsPivot;
-        parts.GetComponent<Rigidbody>().isKinematic = true;
-        parts.transform.position = partsPivot.transform.position;
-        StartCoroutine("ToyAssembly");
+        item.transform.parent = itemPivot;
+        item.GetComponent<Rigidbody>().isKinematic = true;
+        item.transform.position = itemPivot.transform.position;
+        StartCoroutine("UpgradeItem");
     }
 
     public void CancelInteractiveProcess()
     {
-        StopCoroutine("ToyAssembly");
+        StopCoroutine("UpgradeItem");
         timeSpent = 0;
     }
 
-    private IEnumerator ToyAssembly()
+    private IEnumerator UpgradeItem()
     {
-        while(timeSpent < totalTime)
+        while (timeSpent < totalTime)
         {
             yield return new WaitForSeconds(speed);
             timeSpent += speed;

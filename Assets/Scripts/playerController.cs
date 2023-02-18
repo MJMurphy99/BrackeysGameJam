@@ -25,6 +25,7 @@ public class playerController : MonoBehaviour
     public Vector3 direction;
     public static Vector3 facing;
     public static Interactable interaction = null;
+    public GameObject dropShadow;
 
     // Start is called before the first frame update
     void Start()
@@ -69,45 +70,12 @@ public class playerController : MonoBehaviour
             anim.Play("Main Character_Idle");
         }
 
-        //Movement
-        if (!isOnBelt())
-        {
-            moveInput.x = Input.GetAxis("Horizontal");
-            moveInput.y = Input.GetAxis("Vertical");
-            //moveInput.Normalize();
 
-            rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
-        }
-        else if(isOnBelt())
-        {
-            moveInput.x = Input.GetAxis("Horizontal");
-            moveInput.y = Input.GetAxis("Vertical");
+        moveInput.x = Input.GetAxis("Horizontal");
+        moveInput.y = Input.GetAxis("Vertical");
 
-            rb.velocity = speed * direction * Time.deltaTime;
-
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                rb.velocity = new Vector3(moveInput.x * beltSpeedLeft, rb.velocity.y, moveInput.y * speed);
-                if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-                {
-                    rb.velocity = new Vector3(moveInput.x * beltSpeedLeft, rb.velocity.y, moveInput.y * beltSpeedLeft);
-                }
-            }
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                rb.velocity = new Vector3(moveInput.x * beltSpeedRight, rb.velocity.y, moveInput.y * speed);
-                if(Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-                {
-                    rb.velocity = new Vector3(moveInput.x * beltSpeedRight, rb.velocity.y, moveInput.y * beltSpeedRight);
-                }
-
-            }
-
-            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-            {
-                rb.velocity = new Vector3(moveInput.x, rb.velocity.y, moveInput.y * speed);
-            }
-        }
+        rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
+       
 
         //Jump
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
@@ -175,12 +143,6 @@ public class playerController : MonoBehaviour
 
     bool isGrounded()
     {
-        return Physics.CheckSphere(raycastObject.position, 0.1f, groundMask);
-        return Physics.CheckSphere(raycastObject.position, 0.1f, beltMask);
-    }
-
-    bool isOnBelt()
-    {
-        return Physics.CheckSphere(raycastObject.position, 0.1f, beltMask);
+        return Physics.CheckSphere(raycastObject.position, 0.1f);
     }
 }
