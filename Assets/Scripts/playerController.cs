@@ -49,6 +49,11 @@ public class playerController : MonoBehaviour
         {
             jumpForce = jumpForce * 1.5f;
         }
+
+        if (GlobalControl.playerThrowPowerCollected == true)
+        {
+            strength = strength * 2;
+        }
     }
 
     // Update is called once per frame
@@ -102,50 +107,6 @@ public class playerController : MonoBehaviour
         {
             sr.flipX = false;
         }
-
-
-        //animator control
-        //if (Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    anim.SetBool("Side", true);
-        //    anim.SetBool("Backwards", false);
-        //    anim.SetBool("Forward", false);
-        //    anim.SetBool("Idle", false);
-        //}
-
-        //if (Input.GetKey(KeyCode.RightArrow))
-        //{
-        //    anim.SetBool("Side", true);
-        //    anim.SetBool("Backwards", false);
-        //    anim.SetBool("Forward", false);
-        //    anim.SetBool("Idle", false);
-        //}
-
-        //if (Input.GetKey(KeyCode.UpArrow))
-        //{
-        //    anim.SetBool("Backwards", true);
-        //    anim.SetBool("Side", false);
-        //    anim.SetBool("Forward", false);
-        //    anim.SetBool("Idle", false);
-        //}
-
-        //if (Input.GetKey(KeyCode.DownArrow))
-        //{
-        //    anim.SetBool("Forward", true);
-        //    anim.SetBool("Backwards", false);
-        //    anim.SetBool("Side", false);
-        //    anim.SetBool("Idle", false);
-        //}
-
-        //if (!Input.GetKey(KeyCode.UpArrow) && !Input.GetKey(KeyCode.DownArrow) && !Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
-        //{
-        //    rb.velocity = new Vector3(0, 0, 0);
-
-        //    anim.SetBool("Idle", true);
-        //    anim.SetBool("Side", false);
-        //    anim.SetBool("Forward", false);
-        //    anim.SetBool("Backwards", false);
-        //}
     }
 
     bool isGrounded()
@@ -164,7 +125,7 @@ public class playerController : MonoBehaviour
     }
 
     private void Interact()
-    {       
+    {
         if (item != null)
         {
             if (Input.GetKey(KeyCode.E))
@@ -181,11 +142,28 @@ public class playerController : MonoBehaviour
                 else
                 {
                     if (chargeCounter >= 0.25f)
-                        item.GetComponent<Rigidbody>().velocity = facing * strength;
-                    else
-                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
-
-                    item.GetComponent<Toy>().PutDown();
+                    {
+                        if (item.GetComponent<Bomb>() != null)
+                        {
+                            item.GetComponent<Rigidbody>().velocity = facing * strength;
+                            item.GetComponent<Bomb>().BlowUp();
+                        } else
+                        {
+                            item.GetComponent<Rigidbody>().velocity = facing * strength;
+                        }
+                        
+                    }  
+                    else{
+                        if (item.GetComponent<Bomb>() != null)
+                        {
+                            item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                            item.GetComponent<Bomb>().BlowUp();
+                        } else
+                        {
+                            item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                        }
+                    }
+                    item.GetComponent<Item>().PutDown();
                     item = null;
                     chargeCounter = 0.0f;
                 }

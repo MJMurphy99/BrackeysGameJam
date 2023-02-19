@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class BuyPowerUp : MonoBehaviour
 {
@@ -16,11 +17,11 @@ public class BuyPowerUp : MonoBehaviour
 
     public void Update()
     {
-        speedCostTxt.text = "Cost: " + costOfPowerUp;
-        jumpCostTxt.text = "Cost: " + costOfPowerUp;
-        throwCostTxt.text = "Cost: " + costOfPowerUp;
+        speedCostTxt.text = "Increased Movement Speed. Cost: " + costOfPowerUp;
+        jumpCostTxt.text = "Increased Jump Height. Cost: " + costOfPowerUp;
+        throwCostTxt.text = "Increased Throw Power. Cost: " + costOfPowerUp;
 
-        playerCurrencyDisplay.text = "Avaliable Funds: " + GlobalControl.playerMoney;
+        playerCurrencyDisplay.text = "Accrued Generational Wealth: " + GlobalControl.playerMoney;
     }
 
     public void purchaseSpeed()

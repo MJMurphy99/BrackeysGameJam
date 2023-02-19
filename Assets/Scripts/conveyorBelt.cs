@@ -13,6 +13,12 @@ public class conveyorBelt : MonoBehaviour
     public GameObject[] despawnableItems;
     public GameObject[] timerDespawnableItems;
 
+    public void Awake()
+    {
+        despawnableItems = null;
+        timerDespawnableItems = null;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -20,10 +26,13 @@ public class conveyorBelt : MonoBehaviour
         for (int i = 0; i <= onBelt.Count - 1; i++)
         {
             GameObject g = onBelt[i];
-            if(g.CompareTag("Player"))
-                g.GetComponent<Rigidbody>().velocity += direction * speed;
-            else
-                g.GetComponent<Rigidbody>().position += direction * speed * Time.deltaTime;
+            if (g != null)
+            {
+                if (g.CompareTag("Player"))
+                    g.GetComponent<Rigidbody>().velocity += direction * speed;
+                else
+                    g.GetComponent<Rigidbody>().position += direction * speed * Time.deltaTime;
+            }
         }
     }
 

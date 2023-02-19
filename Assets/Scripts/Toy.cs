@@ -12,4 +12,9 @@ public class Toy : Item
         itemID++;
         sr.sprite = itemStages[itemID];
     }
+
+    public void DestroyGameObject()
+    {
+        Destroy(gameObject);
+    }
 }

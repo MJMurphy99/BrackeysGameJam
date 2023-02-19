@@ -54,5 +54,6 @@ public class WorkStation : Interactable
     {
         t.SetPivot(playerHands);
         t.StartInteractiveProcess();
+        t = null;
     }
 }
