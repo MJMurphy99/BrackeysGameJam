@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1be693af-44c5-4793-b866-f72ccf2da30e}">
+		<property name="assetPath">
+			<value>We Were Toymakers - Factory.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>46.079999999999998</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bea464d6-cfad-4a1a-a3cc-a8d56d938fd6}</destination>
+		</relationship>
+	</object>
+</objects>

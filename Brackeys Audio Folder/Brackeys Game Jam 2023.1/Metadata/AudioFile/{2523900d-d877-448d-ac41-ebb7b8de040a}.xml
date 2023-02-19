@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2523900d-d877-448d-ac41-ebb7b8de040a}">
+		<property name="assetPath">
+			<value>sfx_warning_1.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{bea464d6-cfad-4a1a-a3cc-a8d56d938fd6}</destination>
+		</relationship>
+	</object>
+</objects>

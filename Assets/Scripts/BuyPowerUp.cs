@@ -37,6 +37,8 @@ public class BuyPowerUp : MonoBehaviour
             costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
             GlobalControl.playerMoney -= costOfPowerUp;
             speedBtn.interactable = false;
+
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
         }
     }
 
@@ -54,6 +56,7 @@ public class BuyPowerUp : MonoBehaviour
             costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
             GlobalControl.playerMoney -= costOfPowerUp;
             jumpBtn.interactable = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
         }
     }
 
@@ -71,6 +74,7 @@ public class BuyPowerUp : MonoBehaviour
             costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
             GlobalControl.playerMoney -= costOfPowerUp;
             throwBtn.interactable = false;
+            FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
         }
     }
 }

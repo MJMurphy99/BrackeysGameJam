@@ -93,6 +93,7 @@ public class playerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            FMODUnity.RuntimeManager.PlayOneShot("event:/player_jump");
         }
         //Debug(raycastObject.position, Vector3.up * .1f, Color.red);
 
