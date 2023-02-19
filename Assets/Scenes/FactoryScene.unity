@@ -983,6 +983,7 @@ MonoBehaviour:
   needEmptyHands: 0
   playerHands: {fileID: 1893893584}
   sr: {fileID: 0}
+  interactable: 1
   totalTime: 3
   speed: 0.1
   itemPivot: {fileID: 299224918}
@@ -1550,6 +1551,7 @@ MonoBehaviour:
   needEmptyHands: 0
   playerHands: {fileID: 1893893584}
   sr: {fileID: 0}
+  interactable: 1
   totalTime: 3
   speed: 0.1
   itemPivot: {fileID: 925712899}
@@ -2792,6 +2794,7 @@ MonoBehaviour:
   needEmptyHands: 0
   playerHands: {fileID: 1893893584}
   sr: {fileID: 0}
+  interactable: 1
   totalTime: 3
   speed: 0.1
   itemPivot: {fileID: 2009872386}
@@ -3388,6 +3391,10 @@ PrefabInstance:
     - target: {fileID: 6052394706087646202, guid: ae09679ddb90949f28b14e2ee707a672, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6052394706087646205, guid: ae09679ddb90949f28b14e2ee707a672, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6052394706932570907, guid: ae09679ddb90949f28b14e2ee707a672, type: 3}
       propertyPath: m_RootOrder

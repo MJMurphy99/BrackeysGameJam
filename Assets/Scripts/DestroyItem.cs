@@ -16,7 +16,10 @@ public class DestroyItem : MonoBehaviour
                     break;
                 }
             }
-            Destroy(other.gameObject);
+            if (other.GetComponent<Toy>() != null)
+                Destroy(other.gameObject);
+            else if (other.GetComponent<Bomb>() != null)
+                other.GetComponent<Bomb>().BlowUp();
         }  
     }
 }

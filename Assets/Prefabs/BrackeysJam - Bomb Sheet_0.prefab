@@ -58,6 +58,7 @@ GameObject:
   - component: {fileID: 7617207828111005998}
   - component: {fileID: 2114127104}
   - component: {fileID: 2114127105}
+  - component: {fileID: 216794439590677104}
   m_Layer: 0
   m_Name: BrackeysJam - Bomb Sheet_0
   m_TagString: Destructable
@@ -182,3 +183,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &216794439590677104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7617207828111005999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0f0a3fc997f4f4195fa7aeccda4866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  needEmptyHands: 1
+  playerHands: {fileID: 0}
+  sr: {fileID: 0}
+  interactable: 1
+  c: {fileID: 1346345714691192887}
+  pivot: {fileID: 0}
+  explosion: {fileID: 21300000, guid: 9396f205efc6c44c0a48cb9613260651, type: 3}

@@ -26,7 +26,7 @@ public class conveyorSpawner : MonoBehaviour
         canSpawn = false;
 
         yield return new WaitForSeconds(spawnerRate);
-        randItemIndex = 0;//Random.Range(0, conveyorItems.Length);
+        randItemIndex = Random.Range(0, conveyorItems.Length);
 
         Instantiate(conveyorItems[randItemIndex], spawner.position, Quaternion.identity);
 

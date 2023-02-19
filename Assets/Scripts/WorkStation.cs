@@ -20,16 +20,20 @@ public class WorkStation : Interactable
         }
         else
         {
-            t = playerController.item.GetComponent<Toy>();
-            if (t.itemID == workStationType)
+            if(playerController.item.GetComponent<Toy>() != null)
             {
-                t.SetPivot(transform);
-                t.StartInteractiveProcess();
-                ToggleInteractivity();
-                StartCoroutine("UpgradeItem");
+                t = playerController.item.GetComponent<Toy>();
+                if (t.itemID == workStationType)
+                {
+                    t.SetPivot(transform.GetChild(2));
+                    t.StartInteractiveProcess();
+                    ToggleInteractivity();
+                    StartCoroutine("UpgradeItem");
+                }
+                else
+                    t = null;
             }
-            else
-                t = null;
+            
         }
     }
 

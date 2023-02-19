@@ -35,7 +35,7 @@ public abstract class Interactable : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if(interactable)
+            if (interactable)
             {
                 playerController.interaction = null;
                 sr.color = Color.white;

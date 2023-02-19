@@ -164,7 +164,7 @@ public class playerController : MonoBehaviour
     }
 
     private void Interact()
-    {
+    {       
         if (item != null)
         {
             if (Input.GetKey(KeyCode.E))
@@ -194,7 +194,9 @@ public class playerController : MonoBehaviour
         else
         {
             if (Input.GetKeyUp(KeyCode.E) && interaction != null)
+            {
                 interaction.StartInteractiveProcess();
+            }
         }
     }
 }

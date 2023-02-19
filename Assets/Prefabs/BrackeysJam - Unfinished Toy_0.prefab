@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 206938e786f382f4e9eb26831f8377cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needEmptyHands: 0
+  needEmptyHands: 1
   playerHands: {fileID: 0}
   sr: {fileID: 0}
   interactable: 1
