@@ -20,6 +20,8 @@ public class playerController : MonoBehaviour
     public Transform raycastObject;
     public LayerMask groundMask;
     public LayerMask beltMask;
+
+    public static bool onGround;
     //public bool isGrounded = true;
 
     public Vector3 direction;
@@ -59,6 +61,15 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isGrounded())
+        {
+            onGround = true;
+        }
+        else
+        {
+            onGround = false;
+        }
+
         UpdateDropShadow();
         Interact();
         if (Input.GetAxisRaw("Horizontal") != 0)
@@ -112,7 +123,7 @@ public class playerController : MonoBehaviour
 
     bool isGrounded()
     {
-        return Physics.CheckSphere(raycastObject.position, 0.1f);
+        return Physics.CheckSphere(raycastObject.position, 0.1f, groundMask);
     }
 
     private void UpdateDropShadow()

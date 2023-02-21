@@ -11,11 +11,14 @@ public class BoilerInteraction : Interactable
 
     public GameObject boilerIndicator;
 
+    private bool playSound = false;
+
     public float boilerTimer, fullyRefreshedBoilerTime, alertTime;
 
     public void Start()
     {
         boilerIndicator.SetActive(false);
+        playSound = false;
     }
 
     public void Update()
@@ -29,6 +32,8 @@ public class BoilerInteraction : Interactable
         }
         else if (boilerTimer < 0f)
         {
+            //FMODUnity.RuntimeManager.PlayOneShot("event:/big_explosion");
+
             cameraShake.enabled = true;
             Instantiate(explosion, new Vector3(-1.73f, 6.87f, 6.6f), Quaternion.identity);
             Instantiate(explosion, new Vector3(21.63f, 6.87f, 6.6f), Quaternion.identity);
@@ -37,6 +42,7 @@ public class BoilerInteraction : Interactable
             Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
             GlobalControl.playerMoney = GlobalControl.playerMoney - 20;
             StartCoroutine(loadGraveScene());
+            PlayExplosionSound();
         }
         else
         {
@@ -52,8 +58,17 @@ public class BoilerInteraction : Interactable
 
     public IEnumerator loadGraveScene()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(2);
+    }
+
+    public void PlayExplosionSound()
+    {
+        if(playSound == false)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/big_explosion");
+            playSound = true;
+        }
     }
 
 

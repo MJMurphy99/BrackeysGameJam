@@ -9,6 +9,13 @@ public class Bomb : Item
 
     public bool isExploded;
 
+    private bool playSound = false;
+
+    public void Start()
+    {
+        playSound = false;
+    }
+
     public void BlowUp()
     {
         this.GetComponent<Animator>().enabled = false;
@@ -18,9 +25,11 @@ public class Bomb : Item
     private IEnumerator Deteriorate()
     {
         yield return new WaitForSeconds(1.5f);
+        PlayExplosionSound();
         sr.sprite = explosion;
         isExploded = true;
-        yield return new WaitForSeconds(1.5f);
+
+        yield return new WaitForSeconds(0.5f);
         isExploded = false;
         Destroy(gameObject);
     }
@@ -41,6 +50,15 @@ public class Bomb : Item
     {
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(2);
+    }
+
+    public void PlayExplosionSound()
+    {
+        if (playSound == false)
+        {
+            FMODUnity.RuntimeManager.PlayOneShot("event:/bomb_explosion");
+            playSound = true;
+        }
     }
 
 }

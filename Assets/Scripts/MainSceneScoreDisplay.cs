@@ -12,6 +12,6 @@ public class MainSceneScoreDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerCurrencyTxt.text = "Avaliable Funds: " + GlobalControl.playerMoney;
+        playerCurrencyTxt.text = "PayCheck: $" + GlobalControl.playerMoney;
     }
 }
