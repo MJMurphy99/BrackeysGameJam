@@ -40,7 +40,6 @@ public class BoilerInteraction : Interactable
             Instantiate(explosion, new Vector3(20.23f, 6.59f, -8.21f), Quaternion.identity);
             Instantiate(explosion, new Vector3(-2.48f, 3.09f, -8.21f), Quaternion.identity);
             Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
-            GlobalControl.playerMoney = GlobalControl.playerMoney - 20;
             StartCoroutine(loadGraveScene());
             PlayExplosionSound();
         }

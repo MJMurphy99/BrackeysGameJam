@@ -15,13 +15,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ExcludePlayer
   - Water
   - UI
   - Ground
   - Belt
   - PickUp
-  - 
+  - Player
   - 
   - 
   - 

@@ -150,10 +150,21 @@ public class playerController : MonoBehaviour
                 {
                     if (!interaction.GetEmptyHandsCheck())
                         interaction.StartInteractiveProcess();
+                    else
+                    {
+                        if (chargeCounter >= 0.25f && chargeCounter < 0.75f)
+                            item.transform.position = transform.position * 1f;
+                        else if (chargeCounter >= 0.75f)
+                            item.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+
+                        item.GetComponent<Item>().PutDown();
+                        item = null;
+                        chargeCounter = 0.0f;
+                    }
                 }
                 else
                 {
-                    if (chargeCounter >= 0.25f)
+                    if (chargeCounter >= 0.5f)
                     {
                         if (item.GetComponent<Bomb>() != null)
                         {
