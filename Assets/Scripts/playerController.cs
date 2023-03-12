@@ -7,7 +7,7 @@ public class playerController : MonoBehaviour
     public Rigidbody rb;
     public SpriteRenderer sr;
     public CapsuleCollider cc;
-    private Animator anim;
+    public Animator anim;
 
     public float speed;
     public float beltSpeedLeft;
@@ -34,13 +34,14 @@ public class playerController : MonoBehaviour
     public float chargeMax;
     public int strength;
     public static GameObject item;
+    private bool longInteracting = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        cc = GetComponent<CapsuleCollider>();
-        anim = GetComponent<Animator>();
+        //rb = GetComponent<Rigidbody>();
+        //cc = GetComponent<CapsuleCollider>();
+        //anim = GetComponent<Animator>();
 
         if (GlobalControl.playerSpeedPowerCollected == true)
         {
@@ -138,65 +139,75 @@ public class playerController : MonoBehaviour
 
     private void Interact()
     {
-        if (item != null)
+        bool canInteract = interaction != null;
+        bool hasItem = item != null;
+        bool passedEmptyHandsCheck = canInteract &&
+            !(hasItem && interaction.GetEmptyHandsCheck());
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            if (Input.GetKey(KeyCode.E))
+            if (passedEmptyHandsCheck && interaction.longInteraction)
             {
-                chargeCounter += Time.deltaTime;
+                interaction.StartInteractiveProcess();
+                longInteracting = true;
             }
-            else if (Input.GetKeyUp(KeyCode.E))
-            {
-                if (interaction != null)
-                {
-                    if (!interaction.GetEmptyHandsCheck())
-                        interaction.StartInteractiveProcess();
-                    else
-                    {
-                        if (chargeCounter >= 0.25f && chargeCounter < 0.75f)
-                            item.transform.position = transform.position * 1f;
-                        else if (chargeCounter >= 0.75f)
-                            item.GetComponent<Rigidbody>().velocity = playerController.facing * strength;
+        }
+        else if (Input.GetKey(KeyCode.E) && hasItem)
+        {
+            chargeCounter += Time.deltaTime;
 
-                        item.GetComponent<Item>().PutDown();
-                        item = null;
-                        chargeCounter = 0.0f;
-                    }
-                }
+        }
+        else if (Input.GetKeyUp(KeyCode.E))
+        {
+            if (canInteract && !interaction.longInteraction)
+            {
+                if (passedEmptyHandsCheck)
+                    interaction.StartInteractiveProcess();
                 else
                 {
-                    if (chargeCounter >= 0.5f)
-                    {
-                        if (item.GetComponent<Bomb>() != null)
-                        {
-                            item.GetComponent<Rigidbody>().velocity = facing * strength;
-                            item.GetComponent<Bomb>().BlowUp();
-                        } else
-                        {
-                            item.GetComponent<Rigidbody>().velocity = facing * strength;
-                        }
-                        
-                    }  
-                    else{
-                        if (item.GetComponent<Bomb>() != null)
-                        {
-                            item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
-                            item.GetComponent<Bomb>().BlowUp();
-                        } else
-                        {
-                            item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
-                        }
-                    }
+                    if (chargeCounter >= 0.25f && chargeCounter < 0.75f)
+                        item.transform.position = transform.position * 1f;
+                    else if (chargeCounter >= 0.75f)
+                        item.GetComponent<Rigidbody>().velocity = facing * strength;
+
                     item.GetComponent<Item>().PutDown();
                     item = null;
                     chargeCounter = 0.0f;
                 }
             }
-        }
-        else
-        {
-            if (Input.GetKeyUp(KeyCode.E) && interaction != null)
+            else if (canInteract && interaction.longInteraction && longInteracting)
             {
-                interaction.StartInteractiveProcess();
+                longInteracting = interaction.StopInteractiveProcess();
+            }
+            else if ((!canInteract || !longInteracting) && hasItem)
+            {
+                if (chargeCounter >= 0.5f)
+                {
+                    if (item.GetComponent<Bomb>() != null)
+                    {
+                        item.GetComponent<Rigidbody>().velocity = facing * strength;
+                        item.GetComponent<Bomb>().BlowUp();
+                    }
+                    else
+                    {
+                        item.GetComponent<Rigidbody>().velocity = facing * strength;
+                    }
+
+                }
+                else
+                {
+                    if (item.GetComponent<Bomb>() != null)
+                    {
+                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                        item.GetComponent<Bomb>().BlowUp();
+                    }
+                    else
+                    {
+                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                    }
+                }
+                item.GetComponent<Item>().PutDown();
+                item = null;
+                chargeCounter = 0.0f;
             }
         }
     }

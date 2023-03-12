@@ -123,7 +123,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 1558186368, guid: e58d4ee16337049b685b21f3b53b44cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -197,9 +197,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needEmptyHands: 1
+  longInteraction: 0
   playerHands: {fileID: 0}
   sr: {fileID: 0}
   interactable: 1
+  haltInteraction: 0
   c: {fileID: 1346345714691192887}
   pivot: {fileID: 0}
   explosion: {fileID: 21300000, guid: 9396f205efc6c44c0a48cb9613260651, type: 3}

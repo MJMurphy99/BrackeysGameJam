@@ -11,9 +11,15 @@ public class BoilerInteraction : Interactable
 
     public GameObject boilerIndicator;
 
-    private bool playSound = false;
+    private bool playSound = false, depressurizing = false;
 
-    public float boilerTimer, fullyRefreshedBoilerTime, alertTime;
+    public float boilerTimer, fullyRefreshedBoilerTime, alertTime, refreshSpeed;
+
+    public Sprite[] timerPhases;
+    public float[] timeStamps;
+    private int currentSpriteIndex;
+    public SpriteRenderer timerSR;
+    public GameObject timer;
 
     public void Start()
     {
@@ -23,8 +29,15 @@ public class BoilerInteraction : Interactable
 
     public void Update()
     {
-        boilerTimer -= Time.deltaTime;
-
+        if (!depressurizing)
+            boilerTimer -= Time.deltaTime;
+        if (haltInteraction)
+        {
+            StopCoroutine("RelievePressure");
+            StartCoroutine("DeactivateTimer");
+            haltInteraction = false;
+            depressurizing = false;
+        }
 
         if (boilerTimer < alertTime && boilerTimer > 0f)
         {
@@ -51,8 +64,53 @@ public class BoilerInteraction : Interactable
 
     public override void StartInteractiveProcess()
     {
-        boilerTimer = fullyRefreshedBoilerTime;
+        StartCoroutine("RelievePressure");
+    }
 
+    public IEnumerator RelievePressure()
+    {
+        StopCoroutine("DeactivateTimer");
+        UpdateTimer();
+        timer.SetActive(true);
+        depressurizing = true;
+        while(boilerTimer < fullyRefreshedBoilerTime)
+        {
+            yield return new WaitForSeconds(0.5f);
+            boilerTimer += refreshSpeed;
+            UpdateTimer();
+        }
+        if (boilerTimer > fullyRefreshedBoilerTime)
+            boilerTimer = fullyRefreshedBoilerTime;
+        depressurizing = false;
+        StartCoroutine("DeactivateTimer");
+    }
+
+    private void UpdateTimer()
+    {
+        float percentComplete = boilerTimer / fullyRefreshedBoilerTime * 100;
+        print(percentComplete);
+        int phase = 0;
+
+        for (int i = timeStamps.Length - 1; i >= 0; i--)
+        {
+            if (percentComplete >= timeStamps[i])
+            {
+                phase = i;
+                break;
+            }
+        }
+
+        if (phase != currentSpriteIndex)
+        {
+            currentSpriteIndex = phase;
+            timerSR.sprite = timerPhases[phase];
+        }
+    }
+
+    private IEnumerator DeactivateTimer()
+    {
+        yield return new WaitForSeconds(0.75f);
+        timer.SetActive(false);
     }
 
     public IEnumerator loadGraveScene()

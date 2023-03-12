@@ -25,7 +25,7 @@ public class WorkStation : Interactable
         }
         else
         {
-            if(playerController.item.GetComponent<Toy>() != null)
+            if(playerController.item != null && playerController.item.GetComponent<Toy>() != null)
             {
                 t = playerController.item.GetComponent<Toy>();
                 if (t.itemID == workStationType)

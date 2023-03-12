@@ -4,18 +4,25 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour
 {
-    public bool needEmptyHands;
+    public bool needEmptyHands, longInteraction;
     public Transform playerHands;
 
     public SpriteRenderer sr;
     private Color highlight = new Color(255, 235, 0, 255);
     public bool interactable = true;
     private bool playerWaiting = false;
+    public bool haltInteraction = false;
    
 
     // Update is called once per frame
 
     public abstract void StartInteractiveProcess();
+
+    public bool StopInteractiveProcess()
+    {
+        haltInteraction = true;
+        return false;
+    }
 
     public virtual void OnTriggerEnter(Collider other)
     {

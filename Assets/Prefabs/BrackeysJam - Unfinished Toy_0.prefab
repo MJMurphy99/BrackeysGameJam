@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -1708262543, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,16 +130,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needEmptyHands: 1
+  longInteraction: 0
   playerHands: {fileID: 0}
   sr: {fileID: 0}
   interactable: 1
+  haltInteraction: 0
+  c: {fileID: 4327009116621553941}
+  pivot: {fileID: 0}
   itemID: 0
   itemStages:
   - {fileID: -1708262543, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}
   - {fileID: 1127583874, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}
   - {fileID: 156866344, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}
   - {fileID: 1604722110, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}
-  c: {fileID: 4327009116621553941}
 --- !u!1 &4318588518249853059
 GameObject:
   m_ObjectHideFlags: 0
