@@ -9,8 +9,9 @@ public class conveyorSpawner : MonoBehaviour
     public bool canSpawn = true;
     public Transform spawner;
 
-    public int randItemIndex;
+    public int rand;
     public float spawnerRate;
+    public int appearanceProb, appearanceMod;
 
     // Update is called once per frame
     void Update()
@@ -26,9 +27,11 @@ public class conveyorSpawner : MonoBehaviour
         canSpawn = false;
 
         yield return new WaitForSeconds(spawnerRate);
-        randItemIndex = Random.Range(0, conveyorItems.Length);
+        rand = Random.Range(0, appearanceProb);
 
-        Instantiate(conveyorItems[randItemIndex], spawner.position, Quaternion.identity);
+        int itemIndex = rand <= appearanceMod ? 1 : 0;
+
+        Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
 
         canSpawn = true;
     }

@@ -165,7 +165,7 @@ public class playerController : MonoBehaviour
                 else
                 {
                     if (chargeCounter >= 0.25f && chargeCounter < 0.75f)
-                        item.transform.position = transform.position * 1f;
+                        item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
                     else if (chargeCounter >= 0.75f)
                         item.GetComponent<Rigidbody>().velocity = facing * strength;
 
@@ -197,12 +197,12 @@ public class playerController : MonoBehaviour
                 {
                     if (item.GetComponent<Bomb>() != null)
                     {
-                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                        item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
                         item.GetComponent<Bomb>().BlowUp();
                     }
                     else
                     {
-                        item.transform.position = transform.position + facing + (Vector3.up * 0.5f);
+                        item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
                     }
                 }
                 item.GetComponent<Item>().PutDown();
