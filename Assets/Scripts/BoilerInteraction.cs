@@ -48,10 +48,9 @@ public class BoilerInteraction : Interactable
             //FMODUnity.RuntimeManager.PlayOneShot("event:/big_explosion");
 
             cameraShake.enabled = true;
-            Instantiate(explosion, new Vector3(-1.73f, 6.87f, 6.6f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(21.63f, 6.87f, 6.6f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(20.23f, 6.59f, -8.21f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(-2.48f, 3.09f, -8.21f), Quaternion.identity);
+            Instantiate(explosion, new Vector3(15f, 4f, 2.23f), Quaternion.identity);
+            Instantiate(explosion, new Vector3(13f, 4f, 2.23f), Quaternion.identity);
+            Instantiate(explosion, new Vector3(11f, 2f, 2.23f), Quaternion.identity);
             Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
             StartCoroutine(loadGraveScene());
             PlayExplosionSound();
