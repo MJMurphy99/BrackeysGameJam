@@ -16,6 +16,8 @@ public class BathroomInteraction : Interactable
     private int currentSpriteIndex;
     public SpriteRenderer timerSR;
     public GameObject timer;
+    public float[] thresholds;
+    public int[] decrementMod;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,7 @@ public class BathroomInteraction : Interactable
     public void Update()
     {
         if (!depressurizing)
-            bathroomTimer -= Time.deltaTime;
+            RandomDecrement();
 
         if (haltInteraction)
         {
@@ -49,6 +51,21 @@ public class BathroomInteraction : Interactable
         {
             bathroomIndicator.SetActive(false);
         }
+    }
+
+    private void RandomDecrement()
+    {
+        int rand = Random.Range(0, 99);
+        int useMod = 0;
+        for(int i = 0; i < thresholds.Length; i++)
+        {
+            if (rand <= thresholds[i])
+            {
+                useMod = decrementMod[i];
+                break;
+            }
+        }
+        bathroomTimer -= useMod * Time.deltaTime;
     }
 
     public override void StartInteractiveProcess()

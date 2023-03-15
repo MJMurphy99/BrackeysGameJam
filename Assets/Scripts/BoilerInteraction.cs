@@ -20,6 +20,8 @@ public class BoilerInteraction : Interactable
     private int currentSpriteIndex;
     public SpriteRenderer timerSR;
     public GameObject timer;
+    public float[] thresholds;
+    public int[] decrementMod;
 
     public void Start()
     {
@@ -30,7 +32,7 @@ public class BoilerInteraction : Interactable
     public void Update()
     {
         if (!depressurizing)
-            boilerTimer -= Time.deltaTime;
+            RandomDecrement();
         if (haltInteraction)
         {
             StopCoroutine("RelievePressure");
@@ -59,6 +61,21 @@ public class BoilerInteraction : Interactable
         {
             boilerIndicator.SetActive(false);
         }
+    }
+
+    private void RandomDecrement()
+    {
+        int rand = Random.Range(0, 99);
+        int useMod = 0;
+        for (int i = 0; i < thresholds.Length; i++)
+        {
+            if (rand <= thresholds[i])
+            {
+                useMod = decrementMod[i];
+                break;
+            }
+        }
+        boilerTimer -= useMod * Time.deltaTime;
     }
 
     public override void StartInteractiveProcess()

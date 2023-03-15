@@ -355,6 +355,12 @@ MonoBehaviour:
   - 100
   timerSR: {fileID: 1297502656}
   timer: {fileID: 1297502654}
+  thresholds:
+  - 5
+  - 65
+  - 95
+  - 100
+  decrementMod: 00000000010000000200000003000000
 --- !u!65 &71514823
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -405,7 +411,7 @@ MonoBehaviour:
   rand: 0
   spawnerRate: 4
   appearanceProb: 20
-  appearanceMod: 1
+  threshold: 1
 --- !u!4 &149661590
 Transform:
   m_ObjectHideFlags: 0
@@ -2725,6 +2731,12 @@ MonoBehaviour:
   - 100
   timerSR: {fileID: 1247240148}
   timer: {fileID: 1247240146}
+  thresholds:
+  - 5
+  - 65
+  - 95
+  - 100
+  decrementMod: 00000000010000000200000003000000
 --- !u!1 &982753446 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: cd86486ad9e604485b8a93de4a804546, type: 3}
@@ -5020,8 +5032,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossInChair: {fileID: 1563049108}
   bossAtDoor: {fileID: 1491062345}
-  appearanceProb: 30
-  appearanceMod: 1
+  appearanceProb: 2
+  threshold: 1
   checkFrequency: 10
 --- !u!1001 &6052394707421613398
 PrefabInstance:

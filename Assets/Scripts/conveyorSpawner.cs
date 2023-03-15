@@ -11,7 +11,7 @@ public class conveyorSpawner : MonoBehaviour
 
     public int rand;
     public float spawnerRate;
-    public int appearanceProb, appearanceMod;
+    public int appearanceProb, threshold;
 
     // Update is called once per frame
     void Update()
@@ -29,7 +29,7 @@ public class conveyorSpawner : MonoBehaviour
         yield return new WaitForSeconds(spawnerRate);
         rand = Random.Range(0, appearanceProb);
 
-        int itemIndex = rand <= appearanceMod ? 1 : 0;
+        int itemIndex = rand <= threshold ? 1 : 0;
 
         Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
 

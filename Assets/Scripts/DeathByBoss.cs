@@ -7,7 +7,7 @@ public class DeathByBoss : MonoBehaviour
 {
     public GameObject bossInChair, bossAtDoor;
     public static bool inWorkSpace = false;
-    public int appearanceProb, appearanceMod;
+    public int appearanceProb, threshold;
     public float checkFrequency;
     private bool checkingForBoss = false;
 
@@ -33,7 +33,7 @@ public class DeathByBoss : MonoBehaviour
 
     private bool WillBossAppear()
     {
-        return Random.Range(1, appearanceProb) <= appearanceMod;
+        return Random.Range(0, appearanceProb) <= threshold;
     }
 
     private IEnumerator BossAppearsAtDoor()
