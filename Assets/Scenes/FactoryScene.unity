@@ -329,7 +329,7 @@ MonoBehaviour:
   cameraShake: {fileID: 963194231}
   explosion: {fileID: 8556486788860177787, guid: 29f5a2a2de9d5054882a1d02e8d6116f, type: 3}
   boilerIndicator: {fileID: 1961624277}
-  boilerTimer: 5
+  boilerTimer: 50
   fullyRefreshedBoilerTime: 80
   alertTime: 10
   refreshSpeed: 10
@@ -2159,7 +2159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 867479331}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.0300002, z: 5.48}
+  m_LocalPosition: {x: 0, y: 2.06, z: 5.48}
   m_LocalScale: {x: 10, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3872,6 +3872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1491062347}
   - component: {fileID: 1491062346}
+  - component: {fileID: 1491062348}
   m_Layer: 0
   m_Name: BossAtDoor
   m_TagString: Untagged
@@ -3939,13 +3940,33 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491062345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.03, y: 1.33, z: -0.86}
+  m_LocalPosition: {x: 2.03, y: 1.83, z: -0.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1491062348
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1491062345}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c93c49eff1be8294b9bb13e2e073f14f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1493970211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4999,7 +5020,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossInChair: {fileID: 1563049108}
   bossAtDoor: {fileID: 1491062345}
-  appearanceProb: 50
+  appearanceProb: 30
   appearanceMod: 1
   checkFrequency: 10
 --- !u!1001 &6052394707421613398

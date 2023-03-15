@@ -42,10 +42,18 @@ public class DeathByBoss : MonoBehaviour
         yield return new WaitForSeconds(5);
         bossAtDoor.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        if(!inWorkSpace) SceneManager.LoadScene(2);
-        yield return new WaitForSeconds(1);
-        bossAtDoor.SetActive(false);
-        bossInChair.SetActive(true);
-        checkingForBoss = false;
+        if (!inWorkSpace)
+        {
+            bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
+            yield return new WaitForSeconds(0.5f);
+            SceneManager.LoadScene(2);
+        }
+        else 
+        {
+            yield return new WaitForSeconds(1);
+            bossAtDoor.SetActive(false);
+            bossInChair.SetActive(true);
+            checkingForBoss = false;
+        }
     }
 }
