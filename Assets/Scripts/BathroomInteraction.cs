@@ -23,6 +23,11 @@ public class BathroomInteraction : Interactable
     void Start()
     {
         bathroomIndicator.SetActive(false);
+
+        if (GlobalControl.playerDiaperPowerCollected)
+        {
+            fullyRefreshedBathroomTime = fullyRefreshedBathroomTime * 2;
+        }
     }
 
     public void Update()

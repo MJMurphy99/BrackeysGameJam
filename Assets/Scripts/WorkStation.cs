@@ -17,6 +17,14 @@ public class WorkStation : Interactable
 
     private Toy t;
 
+    public void Start()
+    {
+        if (GlobalControl.playerWorkSpeedPowerCollected)
+        {
+            totalTime = totalTime / 2;
+        }
+    }
+
     public override void StartInteractiveProcess()
     {
         if(t != null)
