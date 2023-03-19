@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BoilerInteraction : Interactable
 {
     public CameraShake cameraShake;
+    public DifficultyScalar ds;
 
     public GameObject explosion;
 
@@ -69,7 +70,7 @@ public class BoilerInteraction : Interactable
         int useMod = 0;
         for (int i = 0; i < thresholds.Length; i++)
         {
-            if (rand <= thresholds[i])
+            if (rand <= ds.AdjustFrequency(thresholds[i]))
             {
                 useMod = decrementMod[i];
                 break;

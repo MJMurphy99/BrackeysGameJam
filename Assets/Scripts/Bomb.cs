@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Bomb : Item
 {
     public Sprite explosion;
+    private DifficultyScalar ds;
 
     public bool isExploded;
 
@@ -13,23 +14,24 @@ public class Bomb : Item
 
     public void Start()
     {
+        ds = FindObjectOfType<DifficultyScalar>();
         playSound = false;
     }
 
     public void BlowUp()
     {
-        this.GetComponent<Animator>().enabled = false;
+        GetComponent<Animator>().enabled = false;
         StartCoroutine("Deteriorate");
     }
 
     private IEnumerator Deteriorate()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(ds.AdjustTimer(1.5f));
         PlayExplosionSound();
         sr.sprite = explosion;
         isExploded = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         isExploded = false;
         Destroy(gameObject);
     }

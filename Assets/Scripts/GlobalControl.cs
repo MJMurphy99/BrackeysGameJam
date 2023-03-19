@@ -9,6 +9,12 @@ public class GlobalControl : MonoBehaviour
     public static GlobalControl Instance;
     public static bool playerSpeedPowerCollected, playerJumpPowerCollected, playerThrowPowerCollected, playerDiaperPowerCollected, playerHallPassPowerCollected, playerWorkSpeedPowerCollected;
     public static int playerMoney;
+    private static int powerUpTotal = 0; 
+    public static int PowerUpTotal
+    {
+        get { return powerUpTotal; }
+        set { powerUpTotal = value; }
+    }
 
     void Awake()
     {
@@ -22,5 +28,6 @@ public class GlobalControl : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
 }
 

@@ -327,6 +327,7 @@ MonoBehaviour:
   interactable: 1
   haltInteraction: 0
   cameraShake: {fileID: 963194231}
+  ds: {fileID: 963194232}
   explosion: {fileID: 8556486788860177787, guid: 29f5a2a2de9d5054882a1d02e8d6116f, type: 3}
   boilerIndicator: {fileID: 1961624277}
   boilerTimer: 50
@@ -406,6 +407,7 @@ MonoBehaviour:
   conveyorItems:
   - {fileID: 979236027428080737, guid: d596eee055337244581b9db7e7dd7871, type: 3}
   - {fileID: 7617207828111005999, guid: 26b97c1947b03064b9372dc603c087d6, type: 3}
+  ds: {fileID: 963194232}
   canSpawn: 1
   spawner: {fileID: 149661590}
   rand: 0
@@ -956,6 +958,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   interactable: 1
   haltInteraction: 0
+  ds: {fileID: 963194232}
   totalTime: 3
   speed: 0.1
   itemPivot: {fileID: 351235099}
@@ -2462,6 +2465,7 @@ GameObject:
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
   - component: {fileID: 963194231}
+  - component: {fileID: 963194232}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2584,6 +2588,26 @@ MonoBehaviour:
   shakeDuration: 200
   shakeAmount: 1
   decreaseFactor: 0.5
+--- !u!114 &963194232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 472fe39f7437d4c4a8aad84399509e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frqncyIncrement: 1
+  timerIncrement: 1
+  timerCap: 50
+  frqncyCap: 75
+  money2Timer: 30
+  money2Frqncy: 15
+  timerMod: 0
+  frqncyMod: 0
 --- !u!1 &976544337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2703,6 +2727,7 @@ MonoBehaviour:
   sr: {fileID: 0}
   interactable: 1
   haltInteraction: 0
+  ds: {fileID: 963194232}
   bathroomTimer: 60
   fullyRefreshedBathroomTime: 80
   alertTime: 10
@@ -5032,7 +5057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bossInChair: {fileID: 1563049108}
   bossAtDoor: {fileID: 1491062345}
-  appearanceProb: 2
+  ds: {fileID: 963194232}
+  appearanceProb: 30
   threshold: 1
   checkFrequency: 10
 --- !u!1001 &6052394707421613398

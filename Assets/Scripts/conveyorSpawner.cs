@@ -5,6 +5,7 @@ using UnityEngine;
 public class conveyorSpawner : MonoBehaviour
 {
     public GameObject[] conveyorItems;
+    public DifficultyScalar ds;
 
     public bool canSpawn = true;
     public Transform spawner;
@@ -29,7 +30,7 @@ public class conveyorSpawner : MonoBehaviour
         yield return new WaitForSeconds(spawnerRate);
         rand = Random.Range(0, appearanceProb);
 
-        int itemIndex = rand <= threshold ? 1 : 0;
+        int itemIndex = rand <= ds.AdjustFrequency(threshold) ? 1 : 0;
 
         Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
 

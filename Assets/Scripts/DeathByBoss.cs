@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class DeathByBoss : MonoBehaviour
 {
     public GameObject bossInChair, bossAtDoor;
+    public DifficultyScalar ds;
     public static bool inWorkSpace = false;
     public int appearanceProb, threshold;
     public float checkFrequency;
@@ -26,14 +27,14 @@ public class DeathByBoss : MonoBehaviour
     private IEnumerator CheckForBoss()
     {
         checkingForBoss = true;
-        yield return new WaitForSeconds(checkFrequency);
+        yield return new WaitForSeconds(ds.AdjustTimer(checkFrequency));
         if (WillBossAppear()) StartCoroutine("BossAppearsAtDoor");
         else checkingForBoss = false;
     }
 
     private bool WillBossAppear()
     {
-        return Random.Range(0, appearanceProb) <= threshold;
+        return Random.Range(0, appearanceProb) <= ds.AdjustFrequency(threshold);
     }
 
     private IEnumerator BossAppearsAtDoor()
@@ -56,6 +57,7 @@ public class DeathByBoss : MonoBehaviour
                 bossInChair.SetActive(true);
                 checkingForBoss = false;
                 GlobalControl.playerHallPassPowerCollected = false;
+                GlobalControl.PowerUpTotal--;
             }
         }
         else 

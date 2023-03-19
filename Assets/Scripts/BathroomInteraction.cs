@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class BathroomInteraction : Interactable
 {
-
+    public DifficultyScalar ds;
     public float bathroomTimer, fullyRefreshedBathroomTime, alertTime, refreshSpeed;
 
     public GameObject bathroomIndicator, player;
@@ -15,7 +15,7 @@ public class BathroomInteraction : Interactable
     public float[] timeStamps;
     private int currentSpriteIndex;
     public SpriteRenderer timerSR;
-    public GameObject timer;
+    public GameObject timer; 
     public float[] thresholds;
     public int[] decrementMod;
 
@@ -64,7 +64,7 @@ public class BathroomInteraction : Interactable
         int useMod = 0;
         for(int i = 0; i < thresholds.Length; i++)
         {
-            if (rand <= thresholds[i])
+            if (rand <= ds.AdjustFrequency(thresholds[i]))
             {
                 useMod = decrementMod[i];
                 break;

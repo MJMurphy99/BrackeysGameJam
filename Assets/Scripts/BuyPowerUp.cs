@@ -44,6 +44,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerSpeedPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 speedBtn.interactable = false;
@@ -66,6 +67,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerJumpPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 jumpBtn.interactable = false;
@@ -87,6 +89,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerThrowPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 throwBtn.interactable = false;
@@ -108,6 +111,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerDiaperPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 diaperBtn.interactable = false;
@@ -129,6 +133,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerHallPassPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 hallPassBtn.interactable = false;
@@ -150,6 +155,7 @@ public class BuyPowerUp : MonoBehaviour
             else
             {
                 GlobalControl.playerWorkSpeedPowerCollected = true;
+                GlobalControl.PowerUpTotal++;
                 costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 GlobalControl.playerMoney -= costOfPowerUp;
                 workStationBtn.interactable = false;
