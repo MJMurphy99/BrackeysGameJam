@@ -182,28 +182,11 @@ public class playerController : MonoBehaviour
             {
                 if (chargeCounter >= 0.5f)
                 {
-                    if (item.GetComponent<Bomb>() != null)
-                    {
-                        item.GetComponent<Rigidbody>().velocity = facing * strength;
-                        item.GetComponent<Bomb>().BlowUp();
-                    }
-                    else
-                    {
-                        item.GetComponent<Rigidbody>().velocity = facing * strength;
-                    }
-
+                    item.GetComponent<Rigidbody>().velocity = facing * strength;
                 }
                 else
                 {
-                    if (item.GetComponent<Bomb>() != null)
-                    {
-                        item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
-                        item.GetComponent<Bomb>().BlowUp();
-                    }
-                    else
-                    {
-                        item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
-                    }
+                    item.transform.position = rb.position + facing + (Vector3.up * 0.5f);
                 }
                 item.GetComponent<Item>().PutDown();
                 item = null;

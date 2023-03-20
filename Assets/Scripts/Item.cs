@@ -15,7 +15,7 @@ public class Item : Interactable
             ToggleInteractivity();
     }
 
-    private void PickUp()
+    public virtual void PickUp()
     {
         if (transform.parent != null)
         {
