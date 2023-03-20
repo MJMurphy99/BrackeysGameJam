@@ -48,29 +48,36 @@ public class Bomb : Item
         float mod = 4.0f;
         float incrmnt = 1 / mod, total = 1, c = total, rate = 0.5f / (2 * mod);
         bool changedSign = false, final3Sec = false;
-        print(incrmnt);
-        for (int i = 0; i < 5; i++)
+
+        float caution = 2;
+        int durr = (int)(caution / 0.5f);
+
+        for (int i = 0; i < durr; i++)
         {
-            for(int j = 0; j < (int)mod * 2; j++)
+            for (int j = 0; j < (int)mod * 2; j++)
             {
                 if (j == 0) changedSign = false;
                 c -= incrmnt;
                 sr.color = new Color(total, c, c);
                 yield return new WaitForSeconds(rate);
-                if(!changedSign && j == mod - 1)
+                if (!changedSign && j == mod - 1)
                 {
                     changedSign = true;
                     incrmnt = -incrmnt;
                 }
             }
-            if(!final3Sec && i == 1)
+
+            if (!final3Sec && i == durr - 1)
             {
                 final3Sec = true;
                 mod = 1.0f;
-                incrmnt = 1 / mod; 
-                rate = 0.5f / (2 * mod);
+                incrmnt = 1 / mod;
+                rate = 0.125f / (2 * mod);
+                float terminal = 3;
+                durr += (int)(terminal / 0.125f);
             }
         }
+        
         BlowUp();
     }
 
