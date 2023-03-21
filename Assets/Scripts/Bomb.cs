@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Bomb : Item
 {
+    public float totalWarningT;
     public Sprite explosion;
     private DifficultyScalar ds;
 
@@ -12,11 +13,13 @@ public class Bomb : Item
     private bool isIgnited = false;
 
     private bool playSound = false;
+    private float terminal = 3.0f, caution;
 
     public void Start()
     {
         ds = FindObjectOfType<DifficultyScalar>();
         playSound = false;
+        caution = totalWarningT - terminal;
     }
 
     private void BlowUp()
@@ -49,7 +52,6 @@ public class Bomb : Item
         float incrmnt = 1 / mod, total = 1, c = total, rate = 0.5f / (2 * mod);
         bool changedSign = false, final3Sec = false;
 
-        float caution = 2;
         int durr = (int)(caution / 0.5f);
 
         for (int i = 0; i < durr; i++)
@@ -73,7 +75,6 @@ public class Bomb : Item
                 mod = 1.0f;
                 incrmnt = 1 / mod;
                 rate = 0.125f / (2 * mod);
-                float terminal = 3;
                 durr += (int)(terminal / 0.125f);
             }
         }

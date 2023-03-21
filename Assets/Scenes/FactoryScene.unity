@@ -315,7 +315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71514819}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbf0715e282812f45b838d7622e29fbe, type: 3}
   m_Name: 
@@ -328,9 +328,10 @@ MonoBehaviour:
   haltInteraction: 0
   cameraShake: {fileID: 963194231}
   ds: {fileID: 963194232}
+  totalWarningT: 10
   explosion: {fileID: 8556486788860177787, guid: 29f5a2a2de9d5054882a1d02e8d6116f, type: 3}
   boilerIndicator: {fileID: 1961624277}
-  boilerTimer: 50
+  boilerTimer: 15
   fullyRefreshedBoilerTime: 80
   alertTime: 10
   refreshSpeed: 10
@@ -399,7 +400,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149661588}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eea1614d8496d4bbfbf0df5841dfc70d, type: 3}
   m_Name: 
@@ -413,7 +414,7 @@ MonoBehaviour:
   rand: 0
   spawnerRate: 4
   appearanceProb: 20
-  threshold: 19
+  threshold: 1
 --- !u!4 &149661590
 Transform:
   m_ObjectHideFlags: 0
@@ -4457,7 +4458,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1797685973}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 21.5, y: 2.0100002, z: 5.46}
+  m_LocalPosition: {x: 21.5, y: 2.07, z: 5.46}
   m_LocalScale: {x: 7, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

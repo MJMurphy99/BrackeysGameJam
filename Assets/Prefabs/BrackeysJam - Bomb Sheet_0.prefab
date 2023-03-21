@@ -204,6 +204,7 @@ MonoBehaviour:
   haltInteraction: 0
   c: {fileID: 1346345714691192887}
   pivot: {fileID: 0}
+  totalWarningT: 5
   explosion: {fileID: 21300000, guid: 9396f205efc6c44c0a48cb9613260651, type: 3}
   isExploded: 0
 --- !u!114 &7473147309342483523

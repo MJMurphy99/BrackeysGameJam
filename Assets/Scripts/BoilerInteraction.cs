@@ -7,7 +7,7 @@ public class BoilerInteraction : Interactable
 {
     public CameraShake cameraShake;
     public DifficultyScalar ds;
-
+    public float totalWarningT;
     public GameObject explosion;
 
     public GameObject boilerIndicator;
@@ -23,11 +23,14 @@ public class BoilerInteraction : Interactable
     public GameObject timer;
     public float[] thresholds;
     public int[] decrementMod;
+    private float terminal = 3.0f, caution;
+    private bool warning = false;
 
     public void Start()
     {
         boilerIndicator.SetActive(false);
         playSound = false;
+        caution = totalWarningT - terminal;
     }
 
     public void Update()
@@ -42,26 +45,25 @@ public class BoilerInteraction : Interactable
             depressurizing = false;
         }
 
-        if (boilerTimer < alertTime && boilerTimer > 0f)
+        if (!warning && boilerTimer <= totalWarningT)
         {
+            warning = true;
             boilerIndicator.SetActive(true);
+            StartCoroutine("FlashRed");
         }
-        else if (boilerTimer < 0f)
-        {
-            //FMODUnity.RuntimeManager.PlayOneShot("event:/big_explosion");
+    }
 
-            cameraShake.enabled = true;
-            Instantiate(explosion, new Vector3(15f, 4f, 2.23f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(13f, 4f, 2.23f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(11f, 2f, 2.23f), Quaternion.identity);
-            Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
-            StartCoroutine(loadGraveScene());
-            PlayExplosionSound();
-        }
-        else
-        {
-            boilerIndicator.SetActive(false);
-        }
+    private void BlowUp()
+    {
+        //FMODUnity.RuntimeManager.PlayOneShot("event:/big_explosion");
+
+        cameraShake.enabled = true;
+        Instantiate(explosion, new Vector3(15f, 4f, 2.23f), Quaternion.identity);
+        Instantiate(explosion, new Vector3(13f, 4f, 2.23f), Quaternion.identity);
+        Instantiate(explosion, new Vector3(11f, 2f, 2.23f), Quaternion.identity);
+        Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
+        StartCoroutine(loadGraveScene());
+        PlayExplosionSound();
     }
 
     private void RandomDecrement()
@@ -87,6 +89,7 @@ public class BoilerInteraction : Interactable
     public IEnumerator RelievePressure()
     {
         StopCoroutine("DeactivateTimer");
+        StopCoroutine("FlashRed");
         UpdateTimer();
         timer.SetActive(true);
         depressurizing = true;
@@ -94,6 +97,11 @@ public class BoilerInteraction : Interactable
         {
             yield return new WaitForSeconds(0.5f);
             boilerTimer += refreshSpeed;
+            if(boilerTimer > totalWarningT)
+            {
+                warning = false;
+                boilerIndicator.SetActive(false);
+            }
             UpdateTimer();
         }
         if (boilerTimer > fullyRefreshedBoilerTime)
@@ -145,8 +153,40 @@ public class BoilerInteraction : Interactable
         }
     }
 
+    private IEnumerator FlashRed()
+    {
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        float mod = 4.0f;
+        float incrmnt = 1 / mod, total = 1, c = total, rate = 0.5f / (2 * mod);
+        bool changedSign = false, final3Sec = false;
+
+        int durr = (int)(caution / 0.5f);
+
+        for (int i = 0; i < durr; i++)
+        {
+            for (int j = 0; j < (int)mod * 2; j++)
+            {
+                if (j == 0) changedSign = false;
+                c -= incrmnt;
+                sr.color = new Color(total, c, c);
+                yield return new WaitForSeconds(rate);
+                if (!changedSign && j == mod - 1)
+                {
+                    changedSign = true;
+                    incrmnt = -incrmnt;
+                }
+            }
+
+            if (!final3Sec && i == durr - 1)
+            {
+                final3Sec = true;
+                mod = 1.0f;
+                incrmnt = 1 / mod;
+                rate = 0.125f / (2 * mod);
+                durr += (int)(terminal / 0.125f);
+            }
+        }
+        BlowUp();
+    }
 
 }
-
-
-
