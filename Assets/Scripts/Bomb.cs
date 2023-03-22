@@ -24,6 +24,7 @@ public class Bomb : Item
 
     private void BlowUp()
     {
+        transform.GetChild(0).gameObject.layer = 10;
         GetComponent<Animator>().enabled = false;
         StartCoroutine("Deteriorate");
     }
@@ -89,15 +90,9 @@ public class Bomb : Item
         {
             if (isExploded)
             {
-                StartCoroutine(loadGraveScene());
+                SceneManager.LoadScene(2);
             }
         }
-    }
-
-    public IEnumerator loadGraveScene()
-    {
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(2);
     }
 
     public void PlayExplosionSound()
