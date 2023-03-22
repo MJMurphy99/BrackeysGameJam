@@ -7,6 +7,7 @@ public class DeathByBoss : MonoBehaviour
 {
     public GameObject bossInChair, bossAtDoor;
     public DifficultyScalar ds;
+    public WithinWorkArea[] areas;
     public static bool inWorkSpace = false;
     public int appearanceProb, threshold;
     public float checkFrequency;
@@ -39,33 +40,39 @@ public class DeathByBoss : MonoBehaviour
 
     private IEnumerator BossAppearsAtDoor()
     {
+        for (int i = 0; i < areas.Length; i++) areas[i].Warning();
         bossInChair.SetActive(false);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(8); 
         bossAtDoor.SetActive(true);
         yield return new WaitForSeconds(0.5f);
-        if (!inWorkSpace)
+        float durr = 0;
+        while(durr < 3)
         {
-            if (GlobalControl.playerHallPassPowerCollected == false)
+            if (!inWorkSpace)
             {
-                bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
-                yield return new WaitForSeconds(0.5f);
-                SceneManager.LoadScene(2);
-            } else if (GlobalControl.playerHallPassPowerCollected == true)
-            {
-                yield return new WaitForSeconds(1);
-                bossAtDoor.SetActive(false);
-                bossInChair.SetActive(true);
-                checkingForBoss = false;
-                GlobalControl.playerHallPassPowerCollected = false;
-                GlobalControl.PowerUpTotal--;
+                if (GlobalControl.playerHallPassPowerCollected == false)
+                {
+                    bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
+                    yield return new WaitForSeconds(0.5f);
+                    SceneManager.LoadScene(2);
+                }
+                else if (GlobalControl.playerHallPassPowerCollected == true)
+                {
+                    yield return new WaitForSeconds(1);
+                    bossAtDoor.SetActive(false);
+                    bossInChair.SetActive(true);
+                    checkingForBoss = false;
+                    GlobalControl.playerHallPassPowerCollected = false;
+                    GlobalControl.PowerUpTotal--;
+                }
             }
+            yield return new WaitForSeconds(0.5f);
+            durr += 0.5f;
         }
-        else 
-        {
-            yield return new WaitForSeconds(1);
-            bossAtDoor.SetActive(false);
-            bossInChair.SetActive(true);
-            checkingForBoss = false;
-        }
+
+        bossAtDoor.SetActive(false);
+        bossInChair.SetActive(true);
+        checkingForBoss = false;
+        for (int i = 0; i < areas.Length; i++) areas[i].Deactivate();
     }
 }

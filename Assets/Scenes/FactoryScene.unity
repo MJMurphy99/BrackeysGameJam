@@ -315,7 +315,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 71514819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dbf0715e282812f45b838d7622e29fbe, type: 3}
   m_Name: 
@@ -331,7 +331,7 @@ MonoBehaviour:
   totalWarningT: 10
   explosion: {fileID: 8556486788860177787, guid: 29f5a2a2de9d5054882a1d02e8d6116f, type: 3}
   boilerIndicator: {fileID: 1961624277}
-  boilerTimer: 15
+  boilerTimer: 60
   fullyRefreshedBoilerTime: 80
   alertTime: 10
   refreshSpeed: 10
@@ -718,12 +718,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277805359}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.8218389, y: 1.190443, z: 0}
+  m_LocalPosition: {x: 1, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 976544339}
-  m_RootOrder: 0
+  m_Father: {fileID: 528575217}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &277805361
 SpriteRenderer:
@@ -765,7 +765,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: -485534753, guid: c65003ac8e886e547a853ccc9667f5a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1566,6 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ab613033109b43a9dd32df919e021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalWarningT: 6
 --- !u!65 &694723304
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1621,7 +1622,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.23587143, g: 1, b: 0, a: 0.3254902}
+  m_Color: {r: 0, g: 1, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2077,6 +2078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ab613033109b43a9dd32df919e021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalWarningT: 6
 --- !u!65 &863915764
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2132,7 +2134,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.23587143, g: 1, b: 0, a: 0.3254902}
+  m_Color: {r: 0, g: 1, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2188,6 +2190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ab613033109b43a9dd32df919e021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalWarningT: 6
 --- !u!65 &867479334
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2243,7 +2246,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.23587143, g: 1, b: 0, a: 0.3254902}
+  m_Color: {r: 0, g: 1, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2692,7 +2695,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 277805360}
   - {fileID: 1247240147}
   m_Father: {fileID: 0}
   m_RootOrder: 16
@@ -2728,10 +2730,10 @@ MonoBehaviour:
   sr: {fileID: 0}
   interactable: 1
   haltInteraction: 0
+  totalWarningT: 10
   ds: {fileID: 963194232}
-  bathroomTimer: 60
+  bathroomTimer: 80
   fullyRefreshedBathroomTime: 80
-  alertTime: 10
   refreshSpeed: 10
   bathroomIndicator: {fileID: 277805359}
   player: {fileID: 528575200}
@@ -2756,6 +2758,7 @@ MonoBehaviour:
   - 87.5
   - 100
   timerSR: {fileID: 1247240148}
+  pSR: {fileID: 0}
   timer: {fileID: 1247240146}
   thresholds:
   - 5
@@ -3266,7 +3269,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 976544339}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1247240148
 SpriteRenderer:
@@ -4477,6 +4480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4ab613033109b43a9dd32df919e021, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalWarningT: 6
 --- !u!65 &1797685976
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4532,7 +4536,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.23587143, g: 1, b: 0, a: 0.3254902}
+  m_Color: {r: 0, g: 1, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5051,7 +5055,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130480669}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dfe2c60d46e54904483f96cf6f10b967, type: 3}
   m_Name: 
@@ -5059,8 +5063,13 @@ MonoBehaviour:
   bossInChair: {fileID: 1563049108}
   bossAtDoor: {fileID: 1491062345}
   ds: {fileID: 963194232}
+  areas:
+  - {fileID: 694723303}
+  - {fileID: 863915763}
+  - {fileID: 867479333}
+  - {fileID: 1797685975}
   appearanceProb: 30
-  threshold: 1
+  threshold: 29
   checkFrequency: 10
 --- !u!1001 &6052394707421613398
 PrefabInstance:
