@@ -14,8 +14,8 @@ public class BoilerInteraction : Interactable
 
     private bool playSound = false, depressurizing = false;
 
-    public float boilerTimer, fullyRefreshedBoilerTime, alertTime, refreshSpeed;
-
+    public float boilerTimer, fullyRefreshedBoilerTime, alertTime, refreshSpeed, firstIndication, secondIndication;
+    public ParticleSystem ps1, ps2;
     public Sprite[] timerPhases;
     public float[] timeStamps;
     private int currentSpriteIndex;
@@ -28,6 +28,7 @@ public class BoilerInteraction : Interactable
 
     public void Start()
     {
+        sr = GetComponent<SpriteRenderer>();
         boilerIndicator.SetActive(false);
         playSound = false;
         caution = totalWarningT - terminal;
@@ -44,8 +45,16 @@ public class BoilerInteraction : Interactable
             haltInteraction = false;
             depressurizing = false;
         }
-
-        if (!warning && boilerTimer <= totalWarningT)
+        
+        if(boilerTimer <= firstIndication && boilerTimer > secondIndication)
+        {
+            if (!ps1.isPlaying) ps1.Play();
+        }
+        else if(boilerTimer <= secondIndication && boilerTimer > totalWarningT)
+        {
+            if (!ps2.isPlaying) ps2.Play();
+        }
+        else if (!warning && boilerTimer <= totalWarningT)
         {
             warning = true;
             boilerIndicator.SetActive(true);
@@ -88,6 +97,7 @@ public class BoilerInteraction : Interactable
 
     public IEnumerator RelievePressure()
     {
+        sr.color = Color.white;
         StopCoroutine("DeactivateTimer");
         StopCoroutine("FlashRed");
         UpdateTimer();
@@ -97,10 +107,18 @@ public class BoilerInteraction : Interactable
         {
             yield return new WaitForSeconds(0.5f);
             boilerTimer += refreshSpeed;
-            if(boilerTimer > totalWarningT)
+            if(boilerTimer > totalWarningT && boilerTimer < secondIndication)
             {
                 warning = false;
                 boilerIndicator.SetActive(false);
+            }
+            else if(boilerTimer > secondIndication && boilerTimer < firstIndication)
+            {
+                if (ps2.isPlaying) ps2.Stop();
+            }
+            else if (boilerTimer > firstIndication)
+            {
+                if (ps1.isPlaying) ps1.Stop();
             }
             UpdateTimer();
         }
@@ -113,7 +131,6 @@ public class BoilerInteraction : Interactable
     private void UpdateTimer()
     {
         float percentComplete = boilerTimer / fullyRefreshedBoilerTime * 100;
-        print(percentComplete);
         int phase = 0;
 
         for (int i = timeStamps.Length - 1; i >= 0; i--)
@@ -154,8 +171,7 @@ public class BoilerInteraction : Interactable
     }
 
     private IEnumerator FlashRed()
-    {
-        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+    {        
         float mod = 4.0f;
         float incrmnt = 1 / mod, total = 1, c = total, rate = 0.5f / (2 * mod);
         bool changedSign = false, final3Sec = false;

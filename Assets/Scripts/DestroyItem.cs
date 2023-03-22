@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class DestroyItem : MonoBehaviour
 {
+    public ParticleSystem ps;
     public CameraShake cameraShake;
 
     public GameObject explosion;
@@ -14,6 +15,7 @@ public class DestroyItem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Destructable"))
         {
+            ps.Play();
             for (int i = 0; i < conveyorBelt.onBelt.Count; i++)
             {
                 if (conveyorBelt.onBelt[i] == other.gameObject)

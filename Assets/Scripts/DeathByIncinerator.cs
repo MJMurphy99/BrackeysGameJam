@@ -5,9 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class DeathByIncinerator : MonoBehaviour
 {
+    public ParticleSystem ps;
+
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
-            SceneManager.LoadScene(2);
+        if (other.CompareTag("Player"))
+            StartCoroutine("BelchSmoke");
+    }
+
+    private IEnumerator BelchSmoke()
+    {
+        ps.Play();
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(2);
     }
 }

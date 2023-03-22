@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class BathroomInteraction : Interactable
 {
+    public ParticleSystem ps;
+    public float firstIndication, secondIndication;
     public float totalWarningT;
     public DifficultyScalar ds;
     public float bathroomTimer, fullyRefreshedBathroomTime, refreshSpeed;
@@ -49,10 +51,17 @@ public class BathroomInteraction : Interactable
             player.SetActive(true);
         }
 
-        if (!warning && bathroomTimer < totalWarningT)
+        if(bathroomTimer <= firstIndication && bathroomTimer > secondIndication)
+        {
+            if (!bathroomIndicator.activeSelf) bathroomIndicator.SetActive(true);
+        }
+        else if(bathroomTimer <= secondIndication && bathroomTimer > totalWarningT)
+        {
+            if (!ps.isPlaying) ps.Play();
+        }
+        else if (!warning && bathroomTimer < totalWarningT)
         {
             warning = true;
-            bathroomIndicator.SetActive(true);
             StartCoroutine("FlashRed");
         }
     }
@@ -80,6 +89,7 @@ public class BathroomInteraction : Interactable
 
     public IEnumerator RelievePressure()
     {
+        pSR.color = Color.white;
         StopCoroutine("DeactivateTimer");
         StopCoroutine("FlashRed");
         UpdateTimer();
@@ -89,9 +99,16 @@ public class BathroomInteraction : Interactable
         {
             yield return new WaitForSeconds(0.5f);
             bathroomTimer += refreshSpeed;
-            if(bathroomTimer > totalWarningT)
+            if(bathroomTimer > totalWarningT && bathroomTimer < secondIndication)
             {
                 warning = false;
+            }
+            else if(bathroomTimer > secondIndication && bathroomTimer < firstIndication)
+            {
+                if (ps.isPlaying) ps.Stop();
+            }
+            else if(bathroomTimer > firstIndication)
+            {
                 bathroomIndicator.SetActive(false);
             }
             UpdateTimer();

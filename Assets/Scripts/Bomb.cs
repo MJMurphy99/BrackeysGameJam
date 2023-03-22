@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Bomb : Item
 {
+    public ParticleSystem ps;
     public float totalWarningT;
     public Sprite explosion;
     private DifficultyScalar ds;
@@ -24,6 +25,7 @@ public class Bomb : Item
 
     private void BlowUp()
     {
+        ps.Stop();
         transform.GetChild(0).gameObject.layer = 10;
         GetComponent<Animator>().enabled = false;
         StartCoroutine("Deteriorate");
@@ -77,6 +79,7 @@ public class Bomb : Item
                 incrmnt = 1 / mod;
                 rate = 0.125f / (2 * mod);
                 durr += (int)(terminal / 0.125f);
+                ps.Play();
             }
         }
         
