@@ -20,7 +20,9 @@ public abstract class Interactable : MonoBehaviour
 
     public bool StopInteractiveProcess()
     {
+        ToggleInteractivity();
         haltInteraction = true;
+        interactable = true;
         return false;
     }
 

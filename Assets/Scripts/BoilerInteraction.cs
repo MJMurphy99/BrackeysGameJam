@@ -90,17 +90,21 @@ public class BoilerInteraction : Interactable
 
     private void RandomDecrement()
     {
-        int rand = Random.Range(0, 99);
-        int useMod = 0;
-        for (int i = 0; i < thresholds.Length; i++)
+        if (!ds.grace)
         {
-            if (rand <= ds.AdjustFrequency(thresholds[i]))
+            int rand = Random.Range(0, 99);
+            int useMod = 0;
+            for (int i = 0; i < thresholds.Length; i++)
             {
-                useMod = decrementMod[i];
-                break;
+                if (rand <= ds.AdjustFrequency(thresholds[i]))
+                {
+                    useMod = decrementMod[i];
+                    break;
+                }
             }
+
+            boilerTimer -= useMod * Time.deltaTime;
         }
-        boilerTimer -= useMod * Time.deltaTime;
     }
 
     public override void StartInteractiveProcess()
@@ -146,6 +150,7 @@ public class BoilerInteraction : Interactable
         if (boilerTimer > fullyRefreshedBoilerTime)
             boilerTimer = fullyRefreshedBoilerTime;
         depressurizing = false;
+        
         StartCoroutine("DeactivateTimer");
     }
 

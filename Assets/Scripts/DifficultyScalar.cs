@@ -6,13 +6,17 @@ public class DifficultyScalar : MonoBehaviour
 {
     [Range(0, 100)]
     public float frqncyIncrement, timerIncrement, timerCap, frqncyCap;
+    public float gracePeriod;
     public int money2Timer, money2Frqncy;
     public int timerMod, frqncyMod;
+
+    public bool grace = true;
 
     // Start is called before the first frame update
     void Start()
     {
         UpdateModifiers();
+        StartCoroutine("GracePeriod");
     }
 
     // Update is called once per frame
@@ -35,7 +39,7 @@ public class DifficultyScalar : MonoBehaviour
                 * frqncyIncrement);
         }
 
-
+        gracePeriod -= timerIncrement * timerMod / 100.0f * gracePeriod;
     }
 
     public float AdjustTimer(float baseVal)
@@ -45,6 +49,12 @@ public class DifficultyScalar : MonoBehaviour
 
     public float AdjustFrequency(float baseVal)
     {
-        return frqncyIncrement * frqncyMod / 100.0f * baseVal + baseVal;
+        return grace ? -1 : frqncyIncrement * frqncyMod / 100.0f * baseVal + baseVal;
+    }
+
+    private IEnumerator GracePeriod()
+    {
+        yield return new WaitForSeconds(gracePeriod);
+        grace = false;
     }
 }
