@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
-    public Rigidbody rb;
+    private static Rigidbody rb;
     public SpriteRenderer sr;
     public CapsuleCollider cc;
     public Animator anim;
@@ -26,7 +26,8 @@ public class playerController : MonoBehaviour
 
     public Vector3 direction;
     public static Vector3 facing;
-    public static Interactable interaction = null;
+    public static List<Interactable> interaction = new List<Interactable>();
+    public Interactable[] inter;
     public Transform dropShadow;
     public float groundDepth;
     public bool isHoldingitem = false;
@@ -36,10 +37,48 @@ public class playerController : MonoBehaviour
     public static GameObject item;
     private bool longInteracting = false;
 
+    public static Interactable CurrentPriority
+    {
+        get
+        {
+            if(interaction.Count > 0)
+            {
+                if (item == null)
+                {
+                    float closest = 100;
+                    int current = -1;
+                    for (int i = 0; i < interaction.Count; i++)
+                    {
+                        if (interaction[i] is Item)
+                        {
+                            float d = Vector3.Distance(interaction[i].transform.position, rb.position);
+                            if (d < closest)
+                            {
+                                closest = d;
+                                current = i;
+                            }
+                        }
+                    }
+                    return current == -1 ? interaction[0] : interaction[current];
+                }
+                else
+                {
+                    for (int i = 0; i < interaction.Count; i++)
+                    {
+                        if (!interaction[i].GetEmptyHandsCheck()) return interaction[i];
+                    }
+                    return null;
+                }
+            }
+            else return null;
+        }
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        //rb = GetComponent<Rigidbody>();
+        rb = transform.GetChild(0).GetComponent<Rigidbody>();
         //cc = GetComponent<CapsuleCollider>();
         //anim = GetComponent<Animator>();
 
@@ -62,6 +101,7 @@ public class playerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        inter = interaction.ToArray();
         if (isGrounded())
         {
             onGround = true;
@@ -139,15 +179,15 @@ public class playerController : MonoBehaviour
 
     private void Interact()
     {
-        bool canInteract = interaction != null;
+        bool canInteract = CurrentPriority != null;
         bool hasItem = item != null;
         bool passedEmptyHandsCheck = canInteract &&
-            !(hasItem && interaction.GetEmptyHandsCheck());
+            !(hasItem && CurrentPriority.GetEmptyHandsCheck());
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (passedEmptyHandsCheck && interaction.longInteraction)
+            if (passedEmptyHandsCheck && CurrentPriority.longInteraction)
             {
-                interaction.StartInteractiveProcess();
+                CurrentPriority.StartInteractiveProcess();
                 longInteracting = true;
             }
         }
@@ -158,10 +198,10 @@ public class playerController : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
-            if (canInteract && !interaction.longInteraction)
+            if (canInteract && !CurrentPriority.longInteraction)
             {
                 if (passedEmptyHandsCheck)
-                    interaction.StartInteractiveProcess();
+                    CurrentPriority.StartInteractiveProcess();
                 else
                 {
                     if (chargeCounter >= 0.25f && chargeCounter < 0.75f)
@@ -174,9 +214,9 @@ public class playerController : MonoBehaviour
                     chargeCounter = 0.0f;
                 }
             }
-            else if (canInteract && interaction.longInteraction && longInteracting)
+            else if (canInteract && CurrentPriority.longInteraction && longInteracting)
             {
-                longInteracting = interaction.StopInteractiveProcess();
+                longInteracting = CurrentPriority.StopInteractiveProcess();
             }
             else if ((!canInteract || !longInteracting) && hasItem)
             {

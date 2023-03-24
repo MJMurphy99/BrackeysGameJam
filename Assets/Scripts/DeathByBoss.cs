@@ -53,7 +53,7 @@ public class DeathByBoss : MonoBehaviour
                 if (GlobalControl.playerHallPassPowerCollected == false)
                 {
                     bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(1.0f);
                     SceneManager.LoadScene(2);
                 }
                 else if (GlobalControl.playerHallPassPowerCollected == true)

@@ -31,7 +31,7 @@ public abstract class Interactable : MonoBehaviour
         {
             if (interactable)
             {
-                playerController.interaction = this;
+                playerController.interaction.Add(this);
                 sr.color = highlight;
             }
             else playerWaiting = true;
@@ -44,7 +44,7 @@ public abstract class Interactable : MonoBehaviour
         {
             if (interactable)
             {
-                playerController.interaction = null;
+                playerController.interaction.Remove(this);
                 sr.color = Color.white;
             }
             else playerWaiting = false;
@@ -62,14 +62,14 @@ public abstract class Interactable : MonoBehaviour
         if(!interactable)
         {
             sr.color = Color.white;
-            if(playerController.interaction == this)
-                playerController.interaction = null;
+            if(playerController.interaction.Find((i) => { return i == this; }) != null)
+                playerController.interaction.Remove(this);
         }
         else
         {
             if(playerWaiting)
             {
-                playerController.interaction = this;
+                playerController.interaction.Add(this);
                 sr.color = highlight;
             }
         }

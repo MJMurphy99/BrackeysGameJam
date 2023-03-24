@@ -25,9 +25,11 @@ public class BoilerInteraction : Interactable
     public int[] decrementMod;
     private float terminal = 3.0f, caution;
     private bool warning = false;
+    private Animator a;
 
     public void Start()
     {
+        a = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         boilerIndicator.SetActive(false);
         playSound = false;
@@ -48,11 +50,19 @@ public class BoilerInteraction : Interactable
         
         if(boilerTimer <= firstIndication && boilerTimer > secondIndication)
         {
-            if (!ps1.isPlaying) ps1.Play();
+            if (!ps1.isPlaying)
+            {
+                ps1.Play();
+                a.SetBool("firstIndicator", true);
+            }
         }
         else if(boilerTimer <= secondIndication && boilerTimer > totalWarningT)
         {
-            if (!ps2.isPlaying) ps2.Play();
+            if (!ps2.isPlaying)
+            {
+                ps2.Play();
+                a.SetBool("secondIndicator", true);
+            }
         }
         else if (!warning && boilerTimer <= totalWarningT)
         {
@@ -73,6 +83,9 @@ public class BoilerInteraction : Interactable
         Instantiate(explosion, new Vector3(10.76f, 3.09f, 2.23f), Quaternion.identity);
         StartCoroutine(loadGraveScene());
         PlayExplosionSound();
+        sr.sprite = null;
+        boilerIndicator.SetActive(false);
+
     }
 
     private void RandomDecrement()
@@ -114,11 +127,19 @@ public class BoilerInteraction : Interactable
             }
             else if(boilerTimer > secondIndication && boilerTimer < firstIndication)
             {
-                if (ps2.isPlaying) ps2.Stop();
+                if (ps2.isPlaying)
+                {
+                    ps2.Stop();
+                    a.SetBool("secondIndicator", false);
+                }
             }
             else if (boilerTimer > firstIndication)
             {
-                if (ps1.isPlaying) ps1.Stop();
+                if (ps1.isPlaying)
+                {
+                    ps1.Stop();
+                    a.SetBool("firstIndicator", false);
+                }
             }
             UpdateTimer();
         }

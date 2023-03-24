@@ -87,7 +87,7 @@ public class WorkStation : Interactable
     private void UpdateTimer()
     {
         float percentComplete = timeSpent / totalTime * 100;
-        print(percentComplete);
+ 
         int phase = 0;
 
         for(int i = timeStamps.Length - 1; i >= 0; i--)
