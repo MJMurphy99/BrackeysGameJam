@@ -36,7 +36,7 @@ public abstract class Interactable : MonoBehaviour
                 playerController.interaction.Add(this);
                 sr.color = highlight;
             }
-            else playerWaiting = true;
+            playerWaiting = true;
         }   
     }
 
@@ -49,7 +49,7 @@ public abstract class Interactable : MonoBehaviour
                 playerController.interaction.Remove(this);
                 sr.color = Color.white;
             }
-            else playerWaiting = false;
+            playerWaiting = false;
         }   
     }
 

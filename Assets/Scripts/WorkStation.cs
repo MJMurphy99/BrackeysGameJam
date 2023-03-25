@@ -52,6 +52,7 @@ public class WorkStation : Interactable
 
     private IEnumerator UpgradeItem()
     {
+        timerSR.sprite = timerPhases[0];
         timer.SetActive(true);
         needEmptyHands = true;
         while (timeSpent < totalTime)

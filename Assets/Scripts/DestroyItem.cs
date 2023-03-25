@@ -48,6 +48,7 @@ public class DestroyItem : MonoBehaviour
     public IEnumerator loadGraveScene()
     {
         yield return new WaitForSeconds(1.5f);
+        GlobalControl.deathCounter++;
         SceneManager.LoadScene(2);
     }
 }

@@ -8,6 +8,7 @@ public class DeathByBoss : MonoBehaviour
     public GameObject bossInChair, bossAtDoor;
     public DifficultyScalar ds;
     public WithinWorkArea[] areas;
+    public GameObject[] arrows;
     public static bool inWorkSpace = false;
     public int appearanceProb, threshold;
     public float checkFrequency;
@@ -40,7 +41,11 @@ public class DeathByBoss : MonoBehaviour
 
     private IEnumerator BossAppearsAtDoor()
     {
-        for (int i = 0; i < areas.Length; i++) areas[i].Warning();
+        for (int i = 0; i < areas.Length; i++)
+        {
+            areas[i].Warning();
+            arrows[i].SetActive(true);
+        }
         bossInChair.SetActive(false);
         yield return new WaitForSeconds(8); 
         bossAtDoor.SetActive(true);
@@ -74,6 +79,10 @@ public class DeathByBoss : MonoBehaviour
         bossAtDoor.SetActive(false);
         bossInChair.SetActive(true);
         checkingForBoss = false;
-        for (int i = 0; i < areas.Length; i++) areas[i].Deactivate();
+        for (int i = 0; i < areas.Length; i++)
+        {
+            areas[i].Deactivate();
+            arrows[i].SetActive(false);
+        }
     }
 }
