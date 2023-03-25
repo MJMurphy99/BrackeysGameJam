@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class BuyPowerUp : MonoBehaviour
 {
     //these needs to be ints
-    public int costOfPowerUp;
+    
     public int increaseCostOfPowerUpsMultiplier;
 
     public bool panel1Active = true;
@@ -22,16 +22,17 @@ public class BuyPowerUp : MonoBehaviour
     private void Start()
     {
         StartCoroutine("UpdateGeneration");
+        disableButtonsAlreadyPurchased();
     }
 
     public void Update()
     {
-        speedCostTxt.text = "Increased Movement Speed. Cost: " + costOfPowerUp;
-        jumpCostTxt.text = "Increased Jump Height. Cost: " + costOfPowerUp;
-        throwCostTxt.text = "Increased Throw Power. Cost: " + costOfPowerUp;
-        diaperTxt.text = "Increased Bladder Size. Cost: " + costOfPowerUp;
-        hallPassTxt.text = "Gain a Hall Pass. Cost: " + costOfPowerUp;
-        workStationTxt.text = "Speeds up Work Stations. Cost: " + costOfPowerUp;
+        speedCostTxt.text = "Increased Movement Speed. Cost: " + GlobalControl.costOfPowerUp;
+        jumpCostTxt.text = "Increased Jump Height. Cost: " + GlobalControl.costOfPowerUp;
+        throwCostTxt.text = "Increased Throw Power. Cost: " + GlobalControl.costOfPowerUp;
+        diaperTxt.text = "Increased Bladder Size. Cost: " + GlobalControl.costOfPowerUp;
+        hallPassTxt.text = "Gain a Hall Pass. Cost: " + GlobalControl.costOfPowerUp;
+        workStationTxt.text = "Speeds up Work Stations. Cost: " + GlobalControl.costOfPowerUp;
 
         playerCurrencyDisplay.text = "Accrued Generational Wealth: " + GlobalControl.playerMoney;
     }
@@ -40,7 +41,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerSpeedPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = speedBtn.colors;
                 color.pressedColor = Color.red;
@@ -50,12 +51,15 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerSpeedPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 speedBtn.interactable = false;
 
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            speedBtn.interactable = false;
         }
     }
 
@@ -63,7 +67,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerJumpPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = jumpBtn.colors;
                 color.pressedColor = Color.red;
@@ -73,11 +77,14 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerJumpPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 jumpBtn.interactable = false;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            jumpBtn.interactable = false;
         }
     }
 
@@ -85,7 +92,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerThrowPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = throwBtn.colors;
                 color.pressedColor = Color.red;
@@ -96,11 +103,14 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerThrowPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier; 
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier; 
                 throwBtn.interactable = false;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            throwBtn.interactable = false;
         }
     }
 
@@ -108,7 +118,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerDiaperPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = diaperBtn.colors;
                 color.pressedColor = Color.red;
@@ -119,11 +129,14 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerDiaperPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 diaperBtn.interactable = false;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            diaperBtn.interactable = false;
         }
     }
 
@@ -131,7 +144,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerHallPassPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = hallPassBtn.colors;
                 color.pressedColor = Color.red;
@@ -141,11 +154,14 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerHallPassPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 hallPassBtn.interactable = false;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            hallPassBtn.interactable = false;
         }
     }
 
@@ -153,7 +169,7 @@ public class BuyPowerUp : MonoBehaviour
     {
         if (GlobalControl.playerWorkSpeedPowerCollected == false)
         {
-            if (costOfPowerUp > GlobalControl.playerMoney)
+            if (GlobalControl.costOfPowerUp > GlobalControl.playerMoney)
             {
                 ColorBlock color = workStationBtn.colors;
                 color.pressedColor = Color.red;
@@ -163,11 +179,14 @@ public class BuyPowerUp : MonoBehaviour
             {
                 GlobalControl.playerWorkSpeedPowerCollected = true;
                 GlobalControl.PowerUpTotal++;
-                GlobalControl.playerMoney -= costOfPowerUp;
-                costOfPowerUp = costOfPowerUp * increaseCostOfPowerUpsMultiplier;
+                GlobalControl.playerMoney -= GlobalControl.costOfPowerUp;
+                GlobalControl.costOfPowerUp = GlobalControl.costOfPowerUp * increaseCostOfPowerUpsMultiplier;
                 workStationBtn.interactable = false;
                 FMODUnity.RuntimeManager.PlayOneShot("event:/UI_boughtpowerup");
             }
+        } else
+        {
+            workStationBtn.interactable = false;
         }
     }
 
@@ -194,5 +213,38 @@ public class BuyPowerUp : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         playerGen.text = txt + (GlobalControl.deathCounter + 1);
+    }
+
+    public void disableButtonsAlreadyPurchased()
+    {
+        if(GlobalControl.playerWorkSpeedPowerCollected)
+        {
+            workStationBtn.interactable = false;
+        }
+
+        if (GlobalControl.playerHallPassPowerCollected)
+        {
+            hallPassBtn.interactable = false;
+        }
+
+        if (GlobalControl.playerDiaperPowerCollected)
+        {
+            diaperBtn.interactable = false;
+        }
+
+        if (GlobalControl.playerJumpPowerCollected)
+        {
+            jumpBtn.interactable = false;
+        }
+
+        if (GlobalControl.playerThrowPowerCollected)
+        {
+            throwBtn.interactable = false;
+        }
+
+        if (GlobalControl.playerSpeedPowerCollected)
+        {
+            speedBtn.interactable = false;
+        }
     }
 }

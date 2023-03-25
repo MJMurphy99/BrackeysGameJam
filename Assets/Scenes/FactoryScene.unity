@@ -18500,7 +18500,6 @@ GameObject:
   - component: {fileID: 1338248817}
   - component: {fileID: 1338248816}
   - component: {fileID: 1338248818}
-  - component: {fileID: 1338248819}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -18548,18 +18547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCurrencyTxt: {fileID: 1850722673}
---- !u!114 &1338248819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338248815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a6785e51c278d40917a9bbad66e719, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1375785389
 GameObject:
   m_ObjectHideFlags: 0

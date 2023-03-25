@@ -339,7 +339,7 @@ MonoBehaviour:
   - {fileID: 8767238948216159161}
   StringsBanks:
   - {fileID: 7552429836070208443}
-  cacheTime: 638133798353661737
+  cacheTime: 638126081896246145
   cacheVersion: 131601
 --- !u!114 &704495377879460189
 MonoBehaviour:
@@ -518,7 +518,7 @@ MonoBehaviour:
   Path: Brackeys Audio Folder/Brackeys Game Jam 2023.1/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638133798353661737
+  lastModified: 638124037694908386
   FileSizes:
   - Name: Desktop
     Value: 1738
@@ -619,7 +619,7 @@ MonoBehaviour:
   Path: Brackeys Audio Folder/Brackeys Game Jam 2023.1/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638133798351782075
+  lastModified: 638126081896246145
   FileSizes:
   - Name: Desktop
     Value: 5946528
