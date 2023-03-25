@@ -54,6 +54,7 @@ public class DeathByBoss : MonoBehaviour
                 {
                     bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
                     yield return new WaitForSeconds(1.0f);
+                    GlobalControl.deathCounter++;
                     SceneManager.LoadScene(2);
                 }
                 else if (GlobalControl.playerHallPassPowerCollected == true)

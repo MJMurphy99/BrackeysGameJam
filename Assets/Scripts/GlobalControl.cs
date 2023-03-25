@@ -6,10 +6,11 @@ public class GlobalControl : MonoBehaviour
 {
     //saving inventory data between scenes from this tutorial https://www.sitepoint.com/saving-data-between-scenes-in-unity/
 
+    public static int deathCounter = 0;
     public static GlobalControl Instance;
     public static bool playerSpeedPowerCollected, playerJumpPowerCollected, playerThrowPowerCollected, playerDiaperPowerCollected, playerHallPassPowerCollected, playerWorkSpeedPowerCollected;
     public static int playerMoney;
-    private static int powerUpTotal = 0; 
+    private static int powerUpTotal = 0;
     public static int PowerUpTotal
     {
         get { return powerUpTotal; }

@@ -17,7 +17,12 @@ public class BuyPowerUp : MonoBehaviour
 
     public Button speedBtn, jumpBtn, throwBtn, diaperBtn, hallPassBtn, workStationBtn;
 
-    public TMP_Text playerCurrencyDisplay, speedCostTxt, jumpCostTxt, throwCostTxt, diaperTxt, hallPassTxt, workStationTxt;
+    public TMP_Text playerCurrencyDisplay, speedCostTxt, jumpCostTxt, throwCostTxt, diaperTxt, hallPassTxt, workStationTxt, playerGen;
+
+    private void Start()
+    {
+        StartCoroutine("UpdateGeneration");
+    }
 
     public void Update()
     {
@@ -179,5 +184,15 @@ public class BuyPowerUp : MonoBehaviour
             panel1.SetActive(true);
             panel1Active = true;
         }
+    }
+
+    private IEnumerator UpdateGeneration()
+    {
+        string txt = "Current Family Generation: ";
+        playerGen.text = txt + GlobalControl.deathCounter;
+
+        yield return new WaitForSeconds(1.0f);
+
+        playerGen.text = txt + (GlobalControl.deathCounter + 1);
     }
 }

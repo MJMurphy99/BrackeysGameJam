@@ -155,6 +155,7 @@ public class BathroomInteraction : Interactable
     public IEnumerator loadGraveScene()
     {
         yield return new WaitForSeconds(1);
+        GlobalControl.deathCounter++;
         SceneManager.LoadScene(2);
     }
 

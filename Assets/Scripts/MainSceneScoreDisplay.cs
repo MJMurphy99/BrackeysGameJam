@@ -7,7 +7,7 @@ using TMPro;
 public class MainSceneScoreDisplay : MonoBehaviour
 {
 
-    public TMP_Text playerCurrencyTxt;
+    public TMP_Text playerCurrencyTxt; 
 
     // Update is called once per frame
     void Update()
