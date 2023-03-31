@@ -70,12 +70,6 @@ public class NameManager : MonoBehaviour
         SetName(GlobalControl.deathCounter);           
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SetName(int i)
     {
         string n = "";
@@ -83,12 +77,14 @@ public class NameManager : MonoBehaviour
         {
             case 0:
             {
-                name.text = "Pickle";
+                GlobalControl.playerName = "Pickle";
+                name.text = GlobalControl.playerName;
                 break;
             }
             case 1:
             {
-                name.text = "Pickle Jr.";
+                GlobalControl.playerName = "Pickle Jr.";
+                name.text = GlobalControl.playerName;
                 break;
             }
             default:
@@ -102,7 +98,8 @@ public class NameManager : MonoBehaviour
                     }
                 }
 
-                name.text = "Pickle Jr. " + n;
+                GlobalControl.playerName = "Pickle" + n;
+                name.text = GlobalControl.playerName;
 
                 break;
             }

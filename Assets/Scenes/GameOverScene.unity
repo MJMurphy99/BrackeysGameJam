@@ -5397,7 +5397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4be2c79bfcbf3b4ab0f336732f35879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  costOfPowerUp: 25
   increaseCostOfPowerUpsMultiplier: 2
   panel1Active: 1
   panel1: {fileID: 1916347675}

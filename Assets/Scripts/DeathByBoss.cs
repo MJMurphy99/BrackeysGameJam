@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathByBoss : MonoBehaviour
 {
-    public GameObject bossInChair, bossAtDoor;
+    public GameObject bossInChair, bossAtDoor, camera, firedTextBox;
     public DifficultyScalar ds;
     public WithinWorkArea[] areas;
     public GameObject[] arrows;
@@ -17,7 +17,7 @@ public class DeathByBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        firedTextBox.SetActive(false);
     }
 
     // Update is called once per frame
@@ -60,6 +60,9 @@ public class DeathByBoss : MonoBehaviour
                     bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
                     yield return new WaitForSeconds(1.0f);
                     GlobalControl.deathCounter++;
+                    camera.GetComponent<MoveCamera>().enabled = true;
+                    firedTextBox.SetActive(true);
+                    yield return new WaitForSeconds(4.0f);
                     SceneManager.LoadScene(2);
                 }
                 else if (GlobalControl.playerHallPassPowerCollected == true)
