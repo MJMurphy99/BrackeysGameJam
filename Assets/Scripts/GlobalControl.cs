@@ -12,6 +12,7 @@ public class GlobalControl : MonoBehaviour
     public static bool playerSpeedPowerCollected, playerJumpPowerCollected, playerThrowPowerCollected, playerDiaperPowerCollected, playerHallPassPowerCollected, playerWorkSpeedPowerCollected;
     public static int playerMoney;
     public static string playerName;
+    public static int causeOfDeath = 0;
     private static int powerUpTotal = 0;
     public static int PowerUpTotal
     {

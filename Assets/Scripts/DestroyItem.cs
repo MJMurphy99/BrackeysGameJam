@@ -49,6 +49,7 @@ public class DestroyItem : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         GlobalControl.deathCounter++;
+        GlobalControl.causeOfDeath = 2;
         SceneManager.LoadScene(2);
     }
 }

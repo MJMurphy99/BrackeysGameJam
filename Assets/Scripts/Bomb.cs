@@ -94,6 +94,7 @@ public class Bomb : Item
             if (isExploded)
             {
                 GlobalControl.deathCounter++;
+                GlobalControl.causeOfDeath = 1;
                 SceneManager.LoadScene(2);
             }
         }

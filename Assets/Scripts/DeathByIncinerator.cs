@@ -18,6 +18,7 @@ public class DeathByIncinerator : MonoBehaviour
         ps.Play();
         yield return new WaitForSeconds(0.5f);
         GlobalControl.deathCounter++;
+        GlobalControl.causeOfDeath = 3;
         SceneManager.LoadScene(2);
     }
 }

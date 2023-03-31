@@ -7,8 +7,6 @@ using UnityEngine.EventSystems;
 
 public class BuyPowerUp : MonoBehaviour
 {
-    //these needs to be ints
-    
     public int increaseCostOfPowerUpsMultiplier;
 
     public bool panel1Active = true;
@@ -17,7 +15,7 @@ public class BuyPowerUp : MonoBehaviour
 
     public Button speedBtn, jumpBtn, throwBtn, diaperBtn, hallPassBtn, workStationBtn;
 
-    public TMP_Text playerCurrencyDisplay, speedCostTxt, jumpCostTxt, throwCostTxt, diaperTxt, hallPassTxt, workStationTxt, playerGen;
+    public TMP_Text playerCurrencyDisplay, speedCostTxt, jumpCostTxt, throwCostTxt, diaperTxt, hallPassTxt, workStationTxt, playerGen, causeOfDeathTxt;
 
     private void Start()
     {

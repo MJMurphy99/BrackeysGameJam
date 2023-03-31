@@ -11,7 +11,7 @@ public class BathroomInteraction : Interactable
     public DifficultyScalar ds;
     public float bathroomTimer, fullyRefreshedBathroomTime, refreshSpeed;
 
-    public GameObject bathroomIndicator, player;
+    public GameObject bathroomIndicator, player, camera, bladderExplosion, playerController;
     private bool depressurizing = false;
 
     public Sprite[] timerPhases;
@@ -35,6 +35,8 @@ public class BathroomInteraction : Interactable
         {
             fullyRefreshedBathroomTime = fullyRefreshedBathroomTime * 2;
         }
+
+        bladderExplosion.SetActive(false);
     }
 
     public void Update()
@@ -156,6 +158,12 @@ public class BathroomInteraction : Interactable
     {
         yield return new WaitForSeconds(1);
         GlobalControl.deathCounter++;
+        GlobalControl.causeOfDeath = 4;
+        playerController.GetComponent<playerController>().speed = 0;
+        camera.GetComponent<MoveCameraToPlayer>().enabled = true;
+        yield return new WaitForSeconds(2.0f);
+        bladderExplosion.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
         SceneManager.LoadScene(2);
     }
 

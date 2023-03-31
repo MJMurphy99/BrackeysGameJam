@@ -60,7 +60,8 @@ public class DeathByBoss : MonoBehaviour
                     bossAtDoor.GetComponent<Animator>().SetBool("MakeAngry", true);
                     yield return new WaitForSeconds(1.0f);
                     GlobalControl.deathCounter++;
-                    camera.GetComponent<MoveCamera>().enabled = true;
+                    GlobalControl.causeOfDeath = 5;
+                    camera.GetComponent<MoveCameraToBoss>().enabled = true;
                     firedTextBox.SetActive(true);
                     yield return new WaitForSeconds(4.0f);
                     SceneManager.LoadScene(2);
