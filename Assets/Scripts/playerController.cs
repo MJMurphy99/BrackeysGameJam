@@ -31,6 +31,7 @@ public class playerController : MonoBehaviour
     public Transform dropShadow;
     public float groundDepth;
     public bool isHoldingitem = false;
+    public bool inTitleScene;
     private float chargeCounter = 0.0f;
     public float chargeMax;
     public int strength;

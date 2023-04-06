@@ -4,6 +4,23 @@ using UnityEngine;
 
 public class butoonSounds : MonoBehaviour
 {
+    public void SoundType(int index)
+    {
+        switch (index)
+        {
+            case 0:
+            {
+                playGeneral();
+                break;
+            }
+            case 1:
+            {
+                playPlayButoon();
+                break;
+            }
+        }
+    }
+
     public void playGeneral()
     {
         FMODUnity.RuntimeManager.PlayOneShot("event:/UI_generalbutton");

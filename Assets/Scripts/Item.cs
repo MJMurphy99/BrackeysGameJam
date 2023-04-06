@@ -6,6 +6,7 @@ public class Item : Interactable
 {
     public BoxCollider c;
     public Transform pivot;
+    public bool hasBeenGrabbedYet = false;
 
     // Start is called before the first frame update
     public override void StartInteractiveProcess()
@@ -20,7 +21,14 @@ public class Item : Interactable
         if (transform.parent != null)
         {
             if (transform.parent.CompareTag("Player"))
+            {
                 playerController.item = null;
+                if(!hasBeenGrabbedYet)
+                {
+                    hasBeenGrabbedYet = true;
+                    c.size = new Vector3(2, 2, 2);
+                }
+            }
 
             transform.parent = null;
         }

@@ -23,20 +23,45 @@ public class ButtonManager : MonoBehaviour
         backButton.SetActive(false);
     }
 
+    public void SelectButton(int index)
+    {
+        switch(index)
+        {
+            case 0:
+            {
+                Time.timeScale = 0;
+                ShowCredits();
+                break;
+            }
+            case 1:
+            {
+                PlayGame();
+                break;
+            }
+            case 2:
+            {
+                Time.timeScale = 0;
+                ShowInstructions1();
+                break;
+            }
+        }
+    }
+
     public void BackButton()
     {
         creditsPanel.SetActive(false);
         instructionsPanel1.SetActive(false);
         backButton.SetActive(false);
+        Time.timeScale = 1;
     }
 
-    public void ShowCredits()
+    private void ShowCredits()
     {
         creditsPanel.SetActive(true);
         backButton.SetActive(true);
     }
 
-    public void PlayGame()
+    private void PlayGame()
     {
         SceneManager.LoadScene("FactoryScene");
     }
