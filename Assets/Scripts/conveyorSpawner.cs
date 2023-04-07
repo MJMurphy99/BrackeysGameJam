@@ -29,8 +29,14 @@ public class conveyorSpawner : MonoBehaviour
 
         yield return new WaitForSeconds(spawnerRate);
         rand = Random.Range(0, appearanceProb);
+        int itemIndex;
 
-        int itemIndex = rand <= ds.AdjustFrequency(threshold) ? 1 : 0;
+        if (rand <= ds.AdjustFrequency(threshold))
+        {
+            if (rand == 0) itemIndex = 0;
+            else itemIndex = 1;
+        }
+        else itemIndex = 2;
 
         Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
 

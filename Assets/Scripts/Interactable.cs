@@ -40,7 +40,7 @@ public abstract class Interactable : MonoBehaviour
         }   
     }
 
-    private void OnTriggerExit(Collider other)
+    public virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

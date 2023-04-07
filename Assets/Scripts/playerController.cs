@@ -76,12 +76,17 @@ public class playerController : MonoBehaviour
         
     }
 
+    private void Awake()
+    {
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        anim.SetBool("inTitle", inTitleScene);
         rb = transform.GetChild(0).GetComponent<Rigidbody>();
         //cc = GetComponent<CapsuleCollider>();
-        //anim = GetComponent<Animator>();
 
         if (GlobalControl.playerSpeedPowerCollected == true)
         {
@@ -114,53 +119,58 @@ public class playerController : MonoBehaviour
 
         UpdateDropShadow();
         Interact();
-        if (Input.GetAxisRaw("Horizontal") != 0)
-        {
-            anim.Play("Main Character_Run");
 
-            facing.x = Input.GetAxisRaw("Horizontal");
-            if (Input.GetAxisRaw("Vertical") != 0)
+        if(!inTitleScene)
+        {
+            if (Input.GetAxisRaw("Horizontal") != 0)
+            {
+                anim.Play("Main Character_Run");
+
+                facing.x = Input.GetAxisRaw("Horizontal");
+                if (Input.GetAxisRaw("Vertical") != 0)
+                    facing.z = Input.GetAxisRaw("Vertical");
+                else facing.z = 0;
+            }
+            else if (Input.GetAxisRaw("Vertical") != 0)
+            {
+                anim.Play("Main Character_Run");
+
+                facing.x = 0;
                 facing.z = Input.GetAxisRaw("Vertical");
-            else facing.z = 0;
+            }
+            else
+            {
+                anim.Play("Main Character_Idle");
+            }
+
+
+            moveInput.x = Input.GetAxis("Horizontal");
+            moveInput.y = Input.GetAxis("Vertical");
+
+            rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
+
+
+            //Jump
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+            {
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                FMODUnity.RuntimeManager.PlayOneShot("event:/player_jump");
+            }
+            //Debug(raycastObject.position, Vector3.up * .1f, Color.red);
+
+
+            //Flip Sprite
+            if (!sr.flipX && moveInput.x < 0)
+            {
+                sr.flipX = true;
+
+            }
+            else if (sr.flipX && moveInput.x > 0)
+            {
+                sr.flipX = false;
+            }
         }
-        else if(Input.GetAxisRaw("Vertical") != 0)
-        {
-            anim.Play("Main Character_Run");
-
-            facing.x = 0;
-            facing.z = Input.GetAxisRaw("Vertical");
-        }
-        else
-        {
-            anim.Play("Main Character_Idle");
-        }
-
-
-        moveInput.x = Input.GetAxis("Horizontal");
-        moveInput.y = Input.GetAxis("Vertical");
-
-        rb.velocity = new Vector3(moveInput.x * speed, rb.velocity.y, moveInput.y * speed);
-       
-
-        //Jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            FMODUnity.RuntimeManager.PlayOneShot("event:/player_jump");
-        }
-        //Debug(raycastObject.position, Vector3.up * .1f, Color.red);
-
-
-        //Flip Sprite
-        if (!sr.flipX && moveInput.x < 0)
-        {
-            sr.flipX = true;
-
-        }
-        else if(sr.flipX && moveInput.x > 0)
-        {
-            sr.flipX = false;
-        }
+        
     }
 
     bool isGrounded()
