@@ -137,6 +137,7 @@ MonoBehaviour:
   haltInteraction: 0
   c: {fileID: 4327009116621553941}
   pivot: {fileID: 0}
+  hasBeenGrabbedYet: 0
   itemID: 0
   itemStages:
   - {fileID: -1708262543, guid: 1a543e2b32c99427f8413dd6ef1375aa, type: 3}

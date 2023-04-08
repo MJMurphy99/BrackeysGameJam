@@ -427,13 +427,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149661588}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eea1614d8496d4bbfbf0df5841dfc70d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   conveyorItems:
-  - {fileID: 979236027428080737, guid: 4a3aa8aa12b8ebe49b87cab6c682e297, type: 3}
+  - {fileID: 8918591458115848275, guid: 4a3aa8aa12b8ebe49b87cab6c682e297, type: 3}
   - {fileID: 7617207828111005999, guid: 26b97c1947b03064b9372dc603c087d6, type: 3}
   - {fileID: 979236027428080737, guid: d596eee055337244581b9db7e7dd7871, type: 3}
   ds: {fileID: 963194232}
@@ -442,7 +442,7 @@ MonoBehaviour:
   rand: 0
   spawnerRate: 4
   appearanceProb: 20
-  threshold: 1
+  threshold: 0
 --- !u!4 &149661590
 Transform:
   m_ObjectHideFlags: 0
@@ -7697,7 +7697,7 @@ MonoBehaviour:
   money2Frqncy: 15
   timerMod: 0
   frqncyMod: 0
-  grace: 0
+  grace: 1
 --- !u!114 &963194233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7853,7 +7853,7 @@ MonoBehaviour:
   secondIndication: 20
   totalWarningT: 10
   ds: {fileID: 963194232}
-  bathroomTimer: 60
+  bathroomTimer: 70
   fullyRefreshedBathroomTime: 80
   refreshSpeed: 10
   bathroomIndicator: {fileID: 277805359}
@@ -8624,7 +8624,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       scalar: 0.25
-      minScalar: 1
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -8653,8 +8653,8 @@ ParticleSystem:
         serializedVersion: 2
         m_Curve:
         - serializedVersion: 3
-          time: 0
-          value: 1
+          time: 0.03171158
+          value: 0.05405426
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -8662,7 +8662,7 @@ ParticleSystem:
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
+          time: 0.92248535
           value: 1
           inSlope: 0
           outSlope: 0
@@ -9338,7 +9338,7 @@ ParticleSystem:
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
-        m_PreInfinity: 2
+        m_PreInfinity: 1
         m_PostInfinity: 2
         m_RotationOrder: 4
       minCurve:
