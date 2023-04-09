@@ -98,7 +98,7 @@ public class NameManager : MonoBehaviour
                     }
                 }
 
-                GlobalControl.playerName = "Pickle" + n;
+                GlobalControl.playerName = "Pickle " + n;
                 name.text = GlobalControl.playerName;
 
                 break;
