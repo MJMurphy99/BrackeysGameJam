@@ -330,7 +330,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1408,8 +1408,8 @@ ParticleSystem:
         m_NumAlphaKeys: 2
   UVModule:
     serializedVersion: 2
-    enabled: 0
-    mode: 0
+    enabled: 1
+    mode: 1
     timeMode: 0
     fps: 30
     frameOverTime:
@@ -1527,7 +1527,10 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 0}
+    - sprite: {fileID: 1393905301, guid: 3b1e1effe9ae24b4fab7c05c8994e54c, type: 3}
+    - sprite: {fileID: 1396931789, guid: 3b1e1effe9ae24b4fab7c05c8994e54c, type: 3}
+    - sprite: {fileID: 529284525, guid: 3b1e1effe9ae24b4fab7c05c8994e54c, type: 3}
+    - sprite: {fileID: -833093834, guid: 3b1e1effe9ae24b4fab7c05c8994e54c, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -5017,6 +5020,7 @@ MonoBehaviour:
   haltInteraction: 0
   c: {fileID: 1346345714691192887}
   pivot: {fileID: 0}
+  hasBeenGrabbedYet: 0
   ps: {fileID: 6828805295768661945}
   totalWarningT: 5
   explosion: {fileID: 21300000, guid: 9396f205efc6c44c0a48cb9613260651, type: 3}

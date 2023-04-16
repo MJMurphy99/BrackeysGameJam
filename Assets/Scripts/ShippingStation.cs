@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShippingStation : Interactable
 {
-    public ParticleSystem ps;
+    public ParticleSystem psStandard, psSpecial;
     public DifficultyScalar ds;
     private float timeSpent;
     public float totalTime;
@@ -21,7 +21,13 @@ public class ShippingStation : Interactable
                 t = playerController.item.GetComponent<Toy>();
                 if (t.itemID == workStationType)
                 {
-                    ps.Play();
+                    if (t.name.CompareTo("Special") == 0)
+                    {
+                        psSpecial.Play();
+                        GlobalControl.playerMoney += 15;
+                    }
+
+                    psStandard.Play();
                     GlobalControl.playerMoney = GlobalControl.playerMoney + 15;
                     t.DestroyGameObject();
                     ds.UpdateModifiers();

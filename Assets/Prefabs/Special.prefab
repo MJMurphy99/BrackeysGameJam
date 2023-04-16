@@ -4871,7 +4871,7 @@ GameObject:
   - component: {fileID: 8526372198793388427}
   - component: {fileID: 5616943384006011467}
   m_Layer: 0
-  m_Name: BrackeysJam - Unfinished SpecialToy_0
+  m_Name: Special
   m_TagString: Destructable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4935,7 +4935,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 1761277302, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
+  m_Sprite: {fileID: 316759678, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4998,7 +4998,7 @@ MonoBehaviour:
   hasBeenGrabbedYet: 0
   itemID: 0
   itemStages:
-  - {fileID: 1761277302, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
-  - {fileID: -1064900249, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
-  - {fileID: 200778655, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
-  - {fileID: 455441733, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
+  - {fileID: 316759678, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
+  - {fileID: -1811044305, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
+  - {fileID: 1855188233, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}
+  - {fileID: 40180749, guid: ce77c4ac99b9b0240aae0a1843dff372, type: 3}

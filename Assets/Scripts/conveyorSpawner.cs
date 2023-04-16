@@ -38,7 +38,9 @@ public class conveyorSpawner : MonoBehaviour
         }
         else itemIndex = 2;
 
-        Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
+        GameObject g = Instantiate(conveyorItems[itemIndex], spawner.position, Quaternion.identity);
+        if (itemIndex == 0)
+            g.name = "Special";
 
         canSpawn = true;
     }
